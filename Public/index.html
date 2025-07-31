@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2VJDYJDHYZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-2VJDYJDHYZ');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flour Department - Sourdough, Simplified</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon-32x32.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --tan: #D4B896;
+            --dark-tan: #B39B7D;
+            --light-tan: #E8D5C4;
+            --black: #1A1A1A;
+            --white: #FFFFFF;
+            --cream: #FAF6F0;
+            --gray-100: #F5F5F5;
+            --gray-600: #666666;
+            --gray-800: #333333;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--black);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 30px;
+            width: 100%;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+
+        /* Button Styles - Enhanced touch targets */
+        .btn {
+            display: inline-block;
+            padding: 16px 28px; /* Increased padding for better touch */
+            min-height: 44px; /* Minimum touch target size */
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--gray-800);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--tan);
+            color: var(--black);
+        }
+
+        .btn-secondary:hover {
+            background: var(--dark-tan);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--black);
+            border: 2px solid var(--black);
+        }
+
+        .btn-outline:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: transparent;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header .container {
+            max-width: none;
+            width: 100%;
+            padding: 0 40px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            z-index: 1001;
+        }
+
+        .header.scrolled .logo {
+            color: var(--black);
+        }
+
+        .nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 8px 12px; /* Added padding for better touch targets */
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header.scrolled .nav a {
+            color: var(--black);
+        }
+
+        .nav a:hover {
+            color: var(--tan);
+        }
+
+        /* Mobile Menu - Now functional */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 8px;
+            min-height: 44px;
+            min-width: 44px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mobile-menu-btn span {
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled .mobile-menu-btn span {
+            background: var(--black);
+        }
+
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--black);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 32px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 500;
+            padding: 16px 24px;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Hero Section - COMPLETELY CLEANED */
+        .hero {
+            height: 100vh;
+            min-height: 600px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: var(--black);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 2;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 900px;
+            padding: 0 20px;
+            color: var(--white);
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero h1 {
+            margin-bottom: 20px;
+            color: var(--white);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subheading {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--white);
+            opacity: 0.9;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Why Flour Department Section */
+        .why-section {
+            padding: 100px 0;
+            background: var(--cream);
+        }
+
+        .why-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            justify-content: center;
+        }
+
+        .why-item {
+            padding: 40px 20px;
+            flex: 0 0 auto;
+            width: 300px;
+            max-width: 100%;
+            text-align: center;
+        }
+
+        .why-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--tan);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--black);
+            font-weight: bold;
+        }
+
+        .why-item h3 {
+            color: var(--black);
+            margin-bottom: 15px;
+        }
+
+        /* Bestsellers Section - UPDATED WITH LARGER IMAGES */
+        .bestsellers {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .bestsellers-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 1600px;
+            margin: 0 auto;
+            min-height: 800px;
+            align-items: start;
+        }
+
+        .hero-product {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--cream);
+            height: 800px;
+            transform: translateY(60px);
+        }
+
+        .hero-product-image {
+            width: 100%;
+            height: 100%;
+            background-image: url('bread.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-self: start;
+        }
+
+        .product-card {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: auto;
+            min-height: 320px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            margin-bottom: 15px;
+            margin-top: 0;
+            vertical-align: top;
+        }
+
+        .product-image:hover {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--tan);
+            margin-bottom: 15px;
+        }
+
+        .buy-now-btn {
+            background: var(--black);
+            color: var(--white);
+            padding: 14px 24px; /* Increased padding */
+            min-height: 44px; /* Minimum touch target */
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1rem;
+        }
+
+        .buy-now-btn:hover {
+            background: var(--gray-800);
+            transform: translateY(-2px);
+        }
+
+        /* White Label Section */
+        .white-label-section {
+            padding: 100px 0;
+            background: var(--cream);
+        }
+
+        .white-label-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .white-label-text h2 {
+            color: var(--black);
+            margin-bottom: 20px;
+        }
+
+        .white-label-text p {
+            margin-bottom: 20px;
+        }
+
+        .white-label-image {
+            width: 100%;
+            height: 400px;
+            background: var(--white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-600);
+            border: 2px dashed var(--light-tan);
+            font-style: italic;
+        }
+
+        .learn-section {
+            padding: 100px 0;
+            background: var(--gray-100);
+        }
+
+        .learn-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .learn-text h2 {
+            color: var(--black);
+            margin-bottom: 20px;
+        }
+
+        .learn-text p {
+            margin-bottom: 30px;
+        }
+
+        .learn-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .learn-image {
+            width: 100%;
+            height: 400px;
+            background: var(--white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-600);
+            border: 2px dashed var(--light-tan);
+            font-style: italic;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .testimonials-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+        }
+
+        .testimonial-card {
+            padding: 40px;
+            background: var(--cream);
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            flex: 0 0 auto;
+            width: 350px;
+            max-width: 100%;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: var(--black);
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 100px 0;
+            background: var(--cream);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: var(--white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-600);
+            border: 2px dashed var(--light-tan);
+            font-style: italic;
+        }
+
+        .about-text h2 {
+            color: var(--black);
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            padding: 100px 0;
+            background: var(--black);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            color: var(--white);
+            margin-bottom: 15px;
+        }
+
+        .newsletter p {
+            color: var(--white);
+            opacity: 0.8;
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 16px 18px; /* Increased padding */
+            min-height: 44px; /* Minimum touch target */
+            border: 1px solid var(--gray-600);
+            border-radius: 6px;
+            font-size: 1rem;
+            background: var(--white);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 60px 0 30px;
+            background: var(--white);
+            border-top: 1px solid var(--light-tan);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--black);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: var(--gray-600);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            padding: 8px 0; /* Added padding for touch targets */
+            display: block;
+            min-height: 32px;
+        }
+
+        .footer-section a:hover {
+            color: var(--black);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--light-tan);
+            color: var(--gray-600);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 44px; /* Increased from 40px */
+            height: 44px; /* Increased from 40px */
+            background: var(--gray-100);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-600);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--tan);
+            color: var(--black);
+        }
+
+        /* Discount Popup Styles - Enhanced mobile sizing */
+        .discount-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px; /* Added padding for mobile */
+        }
+
+        .discount-popup.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .discount-popup-content {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 100%; /* Changed from 90% to 100% */
+            text-align: center;
+            position: relative;
+            transform: translateY(30px);
+            transition: transform 0.3s ease;
+            max-height: 90vh; /* Prevent overflow on mobile */
+            overflow-y: auto;
+        }
+
+        .discount-popup.show .discount-popup-content {
+            transform: translateY(0);
+        }
+
+        .discount-popup-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray-600);
+            transition: color 0.3s ease;
+            min-width: 44px; /* Touch target */
+            min-height: 44px; /* Touch target */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .discount-popup-close:hover {
+            color: var(--black);
+        }
+
+        .discount-popup h3 {
+            color: var(--black);
+            margin-bottom: 15px;
+            font-size: 2rem;
+        }
+
+        .discount-popup p {
+            color: var(--gray-600);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .discount-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .discount-input {
+            flex: 1;
+            padding: 14px 16px; /* Increased padding */
+            min-height: 44px; /* Touch target */
+            border: 2px solid var(--light-tan);
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .discount-input:focus {
+            outline: none;
+            border-color: var(--tan);
+        }
+
+        .discount-btn {
+            padding: 14px 24px; /* Increased padding */
+            min-height: 44px; /* Touch target */
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .discount-btn:hover {
+            background: var(--gray-800);
+        }
+
+        .discount-btn:disabled {
+            background: var(--gray-600);
+            cursor: not-allowed;
+        }
+
+        .discount-message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .discount-message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .discount-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .discount-code {
+            background: var(--cream);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 2px dashed var(--tan);
+        }
+
+        .discount-code-text {
+            font-family: 'Courier New', monospace;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--black);
+            margin-bottom: 5px;
+        }
+
+        .discount-popup .small-text {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            margin-top: 15px;
+        }
+
+        /* Enhanced Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px; /* Reduced padding for more content space */
+            }
+
+            .nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .hero {
+                height: 70vh;
+                min-height: 500px;
+            }
+
+            .bestsellers-layout {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .hero-product {
+                min-height: 400px;
+                transform: none; /* Remove transform on mobile */
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .product-card {
+                min-height: 400px;
+            }
+
+            .product-image {
+                height: 350px;
+            }
+
+            .learn-content,
+            .about-content,
+            .white-label-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-content .about-image,
+            .white-label-content .white-label-image {
+                order: -1;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .newsletter-input {
+                min-width: 100%;
+            }
+
+            .hero-cta,
+            .learn-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
+
+            .why-section,
+            .bestsellers,
+            .learn-section,
+            .testimonials,
+            .about-section,
+            .newsletter,
+            .white-label-section {
+                padding: 80px 0;
+            }
+
+            .discount-popup-content {
+                padding: 30px 20px; /* Reduced padding on mobile */
+            }
+
+            .discount-form {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .discount-input {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .header {
+                padding: 15px 0;
+            }
+
+            .header .container {
+                padding: 0 20px;
+            }
+
+            .hero {
+                height: 60vh;
+                min-height: 400px;
+            }
+
+            .why-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-product {
+                min-height: 300px;
+            }
+
+            .product-card {
+                min-height: 350px;
+            }
+
+            .product-image {
+                height: 300px;
+            }
+
+            .why-section,
+            .bestsellers,
+            .learn-section,
+            .testimonials,
+            .about-section,
+            .newsletter,
+            .white-label-section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Discount Popup -->
+    <div class="discount-popup" id="discountPopup">
+        <div class="discount-popup-content">
+            <button class="discount-popup-close" id="closePopup">&times;</button>
+            <h3>10% Off Your First Order</h3>
+            <p>Join our sourdough crew and get a discount code — plus baking tips to get started.</p>
+            
+            <form class="discount-form" id="discountForm">
+                <input type="email" class="discount-input" id="discountEmail" placeholder="Enter your email address" required>
+                <button type="submit" class="discount-btn" id="discountSubmit">Get Code</button>
+            </form>
+            
+            <div class="discount-message" id="discountMessage" style="display: none;"></div>
+            <div class="discount-code" id="discountCodeDisplay" style="display: none;">
+                <div class="discount-code-text" id="discountCodeText"></div>
+                <p>Use this code at checkout!</p>
+            </div>
+            
+            <p class="small-text">No spam, just great sourdough content. Unsubscribe anytime.</p>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">flour department</a>
+                <nav class="nav">
+                    <a href="#home">Home</a>
+                    <a href="#shop">Shop</a>
+                    <a href="#story">Our Story</a>
+                    <a href="#join">Join</a>
+                </nav>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home">Home</a>
+        <a href="#shop">Shop</a>
+        <a href="#story">Our Story</a>
+        <a href="#join">Join</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="SourdoughTimelapse.mp4" type="video/mp4">
+        </video>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Sourdough, Simplified.</h1>
+                <p class="hero-subheading">Easy mixes. Real bread. No stress.</p>
+                <div class="hero-cta">
+                    <a href="#start" class="btn btn-primary">Start Here</a>
+                    <a href="#shop" class="btn btn-secondary">Shop the Mixes</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Flour Department Section -->
+<section class="why-section" id="start">
+    <div class="container">
+        <div class="section-header">
+            <h2>Why Bake With Us?</h2>
+        </div>
+        <div class="why-grid">
+            <div class="why-item">
+                <div class="why-icon">1</div>
+                <h3>Foolproof Kits</h3>
+                <p>Pre-measured ingredients + clear steps = no guesswork.</p>
+            </div>
+            <div class="why-item">
+                <div class="why-icon">2</div>
+                <h3>Made for Beginners</h3>
+                <p>First time baking? Perfect. We walk you through it.</p>
+            </div>
+            <div class="why-item">
+                <div class="why-icon">3</div>
+                <h3>Bakery-Level Bread</h3>
+                <p>Loaves, rolls, pretzels — all from your own oven.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Our Bestsellers Section -->
+    <section class="bestsellers" id="shop">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Mixes</h2>
+                <p>Make Delicious Baked Goods From Your Own Kitchen</p>
+            </div>
+            
+            <div class="bestsellers-layout">
+                <div class="hero-product">
+                    <div class="hero-product-image"></div>
+                </div>
+                
+                <div class="products-grid">
+                    <div class="product-card">
+                        <img src="loafbox.png" alt="Sourdough Kit" class="product-image">
+                        <div class="product-info">
+                            <div class="product-name">Sourdough Loaf Kit</div>
+                            <div class="product-price">$14.00</div>
+                            <a href="loaf.html" class="buy-now-btn">Buy Now</a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="rollbox.png" alt="Sourdough Essentials" class="product-image">
+                        <div class="product-info">
+                            <div class="product-name">Cinnamon Roll Kit</div>
+                            <div class="product-price">$14.00</div>
+                            <a href="product.html" class="buy-now-btn">Buy Now</a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="pretzelbox.png" alt="Cinnamon Roll Kit" class="product-image">
+                        <div class="product-info">
+                            <div class="product-name">Pretzel Kit</div>
+                            <div class="product-price">$14.00</div>
+                            <a href="pretzel.html" class="buy-now-btn">Buy Now</a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="boxnoback.png" alt="Pretzel Kit" class="product-image">
+                        <div class="product-info">
+                            <div class="product-name">Pizza Dough Kit</div>
+                            <div class="product-price">$14.00</div>
+                            <a href="pizza.html" class="buy-now-btn">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- White Label Section -->
+<section class="white-label-section">
+    <div class="container">
+        <div class="white-label-content">
+            <div class="white-label-text">
+                <h2>White Label Sourdough Starter</h2>
+                <p>Need sourdough starter for your own brand? We supply real, active starter with your label — perfect for cafes, classes, boxes, or anything you're building.</p>
+                <p>Custom packaging. Flexible quantities. Simple setup.</p>
+                <div class="learn-buttons">
+                    <a href="#join" class="btn btn-primary">Start a Conversation</a>
+                </div>
+            </div>
+            <div class="white-label-image">
+                <img src="bakery2.png" 
+                     alt="White label sourdough starter packaging" 
+                     width="700" 
+                     height="500">
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Customer Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Customers Say</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"First time baking — perfect loaf!"</p>
+                    <p class="testimonial-author">— Sarah M.</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Easy and fun. My kitchen smells amazing!"</p>
+                    <p class="testimonial-author">— Mike T.</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Even I didn't mess this up!"</p>
+                    <p class="testimonial-author">— Jennifer K.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+<section class="about-section" id="story">
+    <div class="container">
+        <div class="about-content">
+            <div class="about-image">
+                <img src="IMG_2338.jpg" alt="Founder or team baking" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+            </div>
+            <div class="about-text">
+                <h2>Why We Bake</h2>
+                <p>I have always loved baking. Sourdough especially! When I first starter, it felt impossible to get it right, I had so many questions. We made Flour Department so anyone, experienced or not, can enjoy the delicious fun that is making sourdough. Our mixes have everything I wish I had when I was starting out.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Newsletter Signup Section -->
+    <section class="newsletter" id="join">
+        <div class="container">
+            <h2>Join the Department</h2>
+            <p>Get baking tips, recipes, and first dibs on new kits.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                <button type="submit" class="btn btn-secondary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>flour department</h4>
+                    <p>Sourdough, simplified.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="#">All Kits</a></li>
+                        <li><a href="#">Starter Mixes</a></li>
+                        <li><a href="#">Tools & Accessories</a></li>
+                        <li><a href="#">Gift Sets</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="#">Beginner Guide</a></li>
+                        <li><a href="#">Video Tutorials</a></li>
+                        <li><a href="#">Troubleshooting</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:rideforall@gmail.com">rideforall@gmail.com</a></li>
+                        <li><a href="tel:540-642-8215">(540) 642-8215</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Flour Department. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // API base URL - change this to your server URL
+        const API_BASE_URL = 'http://localhost:3000/api';
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        let isMenuOpen = false;
+
+        function toggleMobileMenu() {
+            isMenuOpen = !isMenuOpen;
+            mobileMenuBtn.classList.toggle('active', isMenuOpen);
+            mobileMenu.classList.toggle('active', isMenuOpen);
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+        // Close mobile menu when clicking on links
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                toggleMobileMenu();
+            }
+        });
+
+        // Enhanced navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.header');
+            const heroHeight = document.querySelector('.hero').offsetHeight;
+            
+            if (window.scrollY >= heroHeight - 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    // Close mobile menu if open
+                    if (isMenuOpen) {
+                        toggleMobileMenu();
+                    }
+                    
+                    const offsetTop = target.offsetTop - 80; // Account for fixed header
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Discount Popup Logic
+        function showDiscountPopup() {
+            const popup = document.getElementById('discountPopup');
+            popup.classList.add('show');
+        }
+
+        function hideDiscountPopup() {
+            const popup = document.getElementById('discountPopup');
+            popup.classList.remove('show');
+            localStorage.setItem('discountPopupShown', 'true');
+        }
+
+        // Show popup after 3 seconds if not shown before
+        document.addEventListener('DOMContentLoaded', function() {
+            const hasSeenPopup = localStorage.getItem('discountPopupShown');
+            if (!hasSeenPopup) {
+                setTimeout(showDiscountPopup, 3000);
+            }
+
+            // Close popup handlers
+            document.getElementById('closePopup').addEventListener('click', hideDiscountPopup);
+            document.getElementById('discountPopup').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    hideDiscountPopup();
+                }
+            });
+
+            // Prevent video autoplay issues
+            const video = document.querySelector('.hero-video');
+            if (video) {
+                video.play().catch(function(error) {
+                    console.log('Video autoplay prevented:', error);
+                });
+            }
+        });
+
+        // Discount form submission
+        document.getElementById('discountForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('discountEmail').value;
+            const submitBtn = document.getElementById('discountSubmit');
+            const messageDiv = document.getElementById('discountMessage');
+            const codeDisplay = document.getElementById('discountCodeDisplay');
+            const codeText = document.getElementById('discountCodeText');
+            
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Getting Code...';
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/discount`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email: email })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    messageDiv.className = 'discount-message success';
+                    messageDiv.textContent = data.message;
+                    messageDiv.style.display = 'block';
+                    
+                    if (data.discountCode) {
+                        codeText.textContent = data.discountCode;
+                        codeDisplay.style.display = 'block';
+                    }
+                    
+                    // Hide form after success
+                    document.querySelector('.discount-form').style.display = 'none';
+                } else {
+                    messageDiv.className = 'discount-message error';
+                    messageDiv.textContent = data.message;
+                    messageDiv.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Discount signup error:', error);
+                messageDiv.className = 'discount-message error';
+                messageDiv.textContent = 'Network error. Please try again.';
+                messageDiv.style.display = 'block';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Get Code';
+            }
+        });
+
+        // Newsletter form submission
+        document.querySelector('.newsletter-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = this.querySelector('.newsletter-input').value;
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Subscribing...';
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/newsletter`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email: email })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert(data.message);
+                    this.reset();
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                console.error('Newsletter signup error:', error);
+                alert('Network error. Please try again.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        });
+
+        // Escape key to close popup
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideDiscountPopup();
+                if (isMenuOpen) {
+                    toggleMobileMenu();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

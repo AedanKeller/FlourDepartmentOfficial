@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flour Department - Premium Plastic-Free Products</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=JetBrains+Mono:wght@200;300;400&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-black: #2c2c2c;
+            --soft-black: #3a3a3a;
+            --light-gray: #faf9f7;
+            --mid-gray: #e8e5e0;
+            --text-gray: #8b7355;
+            --pure-white: #ffffff;
+            --accent-line: #2c2c2c;
+            --warm-brown: #d4c4b0;
+            --light-brown: #f5f0e8;
+            --pastel-blue: #e8f2f8;
+            --soft-blue: #d2e6f4;
+            --danger-red: #d4786a;
+            --soft-red: #f2e8e6;
+            --success-green: #7fb069;
+            --soft-green: #e8f5e8;
+            --urgency-orange: #e6965c;
+            --soft-orange: #fdf4ed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--primary-black);
+            background: var(--light-brown);
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 300;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--warm-brown);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: var(--primary-black);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            text-transform: lowercase;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-weight: 300;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+            text-transform: lowercase;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-black);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-black);
+            font-weight: 400;
+        }
+
+        .cta-button {
+            background: var(--soft-blue);
+            color: var(--primary-black);
+            padding: 0.75rem 2rem;
+            border: none;
+            font-weight: 300;
+            text-transform: lowercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.85rem;
+            border-radius: 25px;
+        }
+
+        .cta-button:hover {
+            background: var(--pastel-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Mobile menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            padding: 8px;
+        }
+
+        .mobile-menu-toggle span {
+            width: 20px;
+            height: 2px;
+            background: var(--primary-black);
+            transition: 0.3s;
+            border-radius: 1px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--light-brown) 0%, var(--pastel-blue) 100%);
+            padding-top: 100px;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 10vw, 5rem);
+            font-weight: 300;
+            line-height: 1.1;
+            color: var(--primary-black);
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+            text-transform: lowercase;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: var(--text-gray);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            line-height: 1.7;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Urgency Banner */
+        .urgency-banner {
+            background: var(--urgency-orange);
+            color: var(--primary-black);
+            padding: 1rem 0;
+            text-align: center;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            animation: pulse 2s infinite;
+            border-bottom: 1px solid var(--warm-brown);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .urgency-text {
+            font-size: clamp(0.85rem, 2vw, 0.9rem);
+            text-transform: lowercase;
+        }
+
+        /* Social Proof Section */
+        .social-proof {
+            background: var(--pure-white);
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--warm-brown);
+        }
+
+        .social-proof-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .trust-indicators {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .trust-item {
+            padding: 1rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .trust-item:nth-child(1) { animation-delay: 0.2s; }
+        .trust-item:nth-child(2) { animation-delay: 0.4s; }
+        .trust-item:nth-child(3) { animation-delay: 0.6s; }
+        .trust-item:nth-child(4) { animation-delay: 0.8s; }
+
+        .trust-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 300;
+            color: var(--success-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .trust-label {
+            font-size: clamp(0.8rem, 2vw, 0.85rem);
+            color: var(--text-gray);
+            text-transform: lowercase;
+            letter-spacing: 0.02em;
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: clamp(6rem, 10vw, 8rem) 0;
+            background: var(--light-brown);
+        }
+
+        .products-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 6vw, 2.5rem);
+            text-align: center;
+            color: var(--primary-black);
+            margin-bottom: clamp(3rem, 8vw, 6rem);
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            text-transform: lowercase;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .product-card {
+            background: var(--pure-white);
+            border: 1px solid var(--warm-brown);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.2s; }
+        .product-card:nth-child(2) { animation-delay: 0.4s; }
+        .product-card:nth-child(3) { animation-delay: 0.6s; }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--success-green);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 400;
+            text-transform: lowercase;
+            letter-spacing: 0.02em;
+            z-index: 5;
+        }
+
+        .product-badge.popular {
+            background: var(--urgency-orange);
+        }
+
+        .product-badge.limited {
+            background: var(--danger-red);
+            animation: pulse 2s infinite;
+        }
+
+        .product-image {
+            height: 280px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(20%) saturate(80%);
+            transition: filter 0.6s ease, transform 0.3s ease;
+        }
+
+        .product-card:hover .product-image img {
+            filter: sepia(10%) saturate(100%);
+            transform: scale(1.05);
+        }
+
+        .product-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: clamp(1.2rem, 3vw, 1.4rem);
+            margin-bottom: 1rem;
+            font-weight: 400;
+            text-transform: lowercase;
+            letter-spacing: 0.02em;
+        }
+
+        .product-description {
+            color: var(--text-gray);
+            line-height: 1.6;
+            font-size: clamp(0.85rem, 2vw, 0.9rem);
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .product-features li {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .product-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success-green);
+            font-weight: bold;
+        }
+
+        .price-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--soft-green);
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .original-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            text-decoration: line-through;
+            color: var(--text-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .current-price {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--primary-black);
+            margin-bottom: 0.5rem;
+        }
+
+        .price-label {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            text-transform: lowercase;
+            letter-spacing: 0.02em;
+        }
+
+        .savings-badge {
+            background: var(--success-green);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 400;
+            text-transform: lowercase;
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--pastel-blue);
+            border-radius: 10px;
+        }
+
+        .quantity-btn {
+            background: var(--pure-white);
+            border: 1px solid var(--warm-brown);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            background: var(--soft-blue);
+        }
+
+        .quantity-input {
+            width: 60px;
+            text-align: center;
+            border: 1px solid var(--warm-brown);
+            padding: 0.5rem;
+            border-radius: 5px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .add-to-cart {
+            background: var(--success-green);
+            color: white;
+            padding: 1rem 1.5rem;
+            border: none;
+            font-weight: 400;
+            text-transform: lowercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.9rem;
+            border-radius: 25px;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart:hover {
+            background: var(--soft-black);
+            transform: translateY(-2px);
+        }
+
+        .buy-now {
+            background: var(--urgency-orange);
+            color: var(--primary-black);
+            padding: 1rem 1.5rem;
+            border: none;
+            font-weight: 400;
+            text-transform: lowercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.9rem;
+            border-radius: 25px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .buy-now:hover {
+            background: var(--primary-black);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            background: var(--pure-white);
+            padding: clamp(6rem, 10vw, 8rem) 0;
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background: var(--light-brown);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--warm-brown);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .testimonial-card:nth-child(1) { animation-delay: 0.2s; }
+        .testimonial-card:nth-child(2) { animation-delay: 0.4s; }
+        .testimonial-card:nth-child(3) { animation-delay: 0.6s; }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: 400;
+            color: var(--primary-black);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-location {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            text-transform: lowercase;
+        }
+
+        .stars {
+            color: var(--urgency-orange);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* Guarantee Section */
+        .guarantee-section {
+            background: var(--soft-green);
+            padding: clamp(4rem, 8vw, 6rem) 0;
+        }
+
+        .guarantee-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .guarantee-title {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin-bottom: 2rem;
+            font-weight: 400;
+            text-transform: lowercase;
+        }
+
+        .guarantee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .guarantee-item {
+            padding: 1.5rem;
+            background: var(--pure-white);
+            border-radius: 15px;
+            border: 1px solid var(--warm-brown);
+        }
+
+        .guarantee-icon {
+            font-size: 2rem;
+            color: var(--success-green);
+            margin-bottom: 1rem;
+        }
+
+        .guarantee-text {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            line-height: 1.5;
+        }
+
+        /* Bundle Section */
+        .bundle-section {
+            background: var(--primary-black);
+            color: white;
+            padding: clamp(6rem, 10vw, 8rem) 0;
+        }
+
+        .bundle-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .bundle-title {
+            font-size: clamp(2rem, 6vw, 2.5rem);
+            margin-bottom: 1rem;
+            font-weight: 300;
+            text-transform: lowercase;
+        }
+
+        .bundle-subtitle {
+            font-size: clamp(1rem, 3vw, 1.1rem);
+            opacity: 0.8;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .bundle-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin: 2rem auto;
+            max-width: 600px;
+        }
+
+        .bundle-items {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .bundle-items li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bundle-price-section {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+        }
+
+        .bundle-original {
+            font-family: 'JetBrains Mono', monospace;
+            text-decoration: line-through;
+            opacity: 0.7;
+            margin-bottom: 0.5rem;
+        }
+
+        .bundle-savings {
+            font-size: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--success-green);
+            font-weight: 400;
+        }
+
+        .bundle-cta {
+            background: var(--success-green);
+            color: white;
+            padding: 1.25rem 3rem;
+            border: none;
+            font-weight: 400;
+            font-size: 1rem;
+            text-transform: lowercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 30px;
+            margin-top: 2rem;
+        }
+
+        .bundle-cta:hover {
+            background: var(--urgency-orange);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-black);
+            color: white;
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-text {
+            opacity: 0.7;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            font-weight: 300;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .nav-container {
+                padding: 2rem 3rem;
+            }
+            
+            .hero-container,
+            .products-container,
+            .testimonials-container,
+            .guarantee-container,
+            .bundle-container {
+                padding: 0 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-right {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                border-top: 1px solid var(--warm-brown);
+                padding: 2rem;
+                flex-direction: column;
+                gap: 1.5rem;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            }
+            
+            .nav-right.mobile-open {
+                display: flex;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .hero {
+                padding-top: 120px;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .trust-indicators {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .guarantee-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 1rem 1.5rem;
+            }
+            
+            .hero-container,
+            .products-container,
+            .testimonials-container,
+            .guarantee-container,
+            .bundle-container {
+                padding: 0 1.5rem;
+            }
+
+            .trust-indicators {
+                grid-template-columns: 1fr;
+            }
+
+            .guarantee-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Cart functionality styles - REMOVED */
+        .guarantee-icon {
+            font-size: 1.5rem;
+            color: var(--success-green);
+            margin-bottom: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 400;
+            text-transform: lowercase;
+        }
+    </style>
+</head>
+<body>
+    <!-- Urgency Banner -->
+    <div class="urgency-banner">
+        <div class="urgency-text">
+            <i class="fas fa-fire"></i> limited time: free shipping on all orders over $75 - ends midnight tonight!
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">flour department</a>
+            
+                            <div class="nav-right" id="nav-right">
+                <ul class="nav-links">
+                    <li><a href="#home">home</a></li>
+                    <li><a href="#products" class="active">products</a></li>
+                    <li><a href="#recipes">recipes</a></li>
+                    <li><a href="#about">about</a></li>
+                    <li><a href="#contact">contact</a></li>
+                </ul>
+                <a href="#bundle" class="cta-button">save 40%</a>
+            </div>
+            
+            <div class="mobile-menu-toggle" id="mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">premium plastic-free products</h1>
+                <p class="hero-subtitle">discover our complete collection of microplastic-free sourdough essentials. each product is crafted without any plastic contact, ensuring the purest possible nutrition for your family.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Section -->
+    <section class="social-proof">
+        <div class="social-proof-container">
+            <div class="trust-indicators">
+                <div class="trust-item">
+                    <div class="trust-number">zero</div>
+                    <div class="trust-label">plastic contamination</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-number">100%</div>
+                    <div class="trust-label">biodegradable packaging</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-number">30-day</div>
+                    <div class="trust-label">purity guarantee</div>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-number">lifetime</div>
+                    <div class="trust-label">email support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section" id="products">
+        <div class="products-container">
+            <h2 class="section-title">our complete collection</h2>
+            
+            <div class="products-grid">
+                <!-- Sourdough Starter Kit -->
+                <div class="product-card">
+                    <div class="product-badge popular">most popular</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Complete sourdough starter kit">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">complete starter kit</h3>
+                        <p class="product-description">everything you need to begin your plastic-free sourdough journey. includes active culture, glass vessels, wooden utensils, and our comprehensive 50-page guide.</p>
+                        
+                        <ul class="product-features">
+                            <li>25g active sourdough culture</li>
+                            <li>2 glass fermentation jars</li>
+                            <li>wooden mixing utensils</li>
+                            <li>50-page care & recipe guide</li>
+                            <li>100% plastic-free packaging</li>
+                            <li>lifetime email support</li>
+                        </ul>
+                        
+                        <div class="price-section">
+                            <div class="original-price">$79.99</div>
+                            <div class="current-price">$49.99</div>
+                            <div class="price-label">limited time price</div>
+                            <div class="savings-badge">save $30</div>
+                        </div>
+                        
+                        <div class="quantity-selector">
+                            <button class="quantity-btn" onclick="changeQuantity(1, -1)">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1" id="qty-1" readonly>
+                            <button class="quantity-btn" onclick="changeQuantity(1, 1)">+</button>
+                        </div>
+                        
+                        <button class="add-to-cart" onclick="orderProduct(1)">order starter kit</button>
+                        <button class="buy-now" onclick="orderProduct(1)">order now - save $30</button>
+                    </div>
+                </div>
+
+                <!-- Sourdough Starter Refill -->
+                <div class="product-card">
+                    <div class="product-badge">best value</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sourdough starter refill">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">starter culture refill</h3>
+                        <p class="product-description">premium dehydrated culture for refreshing existing starters or creating backups. perfect for experienced bakers or gifting to friends.</p>
+                        
+                        <ul class="product-features">
+                            <li>25g dehydrated culture</li>
+                            <li>activation instructions</li>
+                            <li>biodegradable packaging</li>
+                            <li>2-year shelf life</li>
+                            <li>zero plastic contact</li>
+                            <li>free shipping eligible</li>
+                        </ul>
+                        
+                        <div class="price-section">
+                            <div class="original-price">$34.99</div>
+                            <div class="current-price">$24.99</div>
+                            <div class="price-label">everyday low price</div>
+                            <div class="savings-badge">save $10</div>
+                        </div>
+                        
+                        <div class="quantity-selector">
+                            <button class="quantity-btn" onclick="changeQuantity(2, -1)">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1" id="qty-2" readonly>
+                            <button class="quantity-btn" onclick="changeQuantity(2, 1)">+</button>
+                        </div>
+                        
+                        <button class="add-to-cart" onclick="orderProduct(2)">order culture refill</button>
+                        <button class="buy-now" onclick="orderProduct(2)">order now - free shipping</button>
+                    </div>
+                </div>
+
+                <!-- Glass Mixing Bowls -->
+                <div class="product-card">
+                    <div class="product-badge">eco-friendly</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1595535873420-a599195b3f4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Glass mixing bowls">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">glass mixing bowl set</h3>
+                        <p class="product-description">premium borosilicate glass bowls designed for sourdough preparation. three sizes ensure perfect mixing without plastic contamination.</p>
+                        
+                        <ul class="product-features">
+                            <li>3 graduated glass bowls</li>
+                            <li>500ml, 1l, 2l capacity</li>
+                            <li>dishwasher safe</li>
+                            <li>thermal shock resistant</li>
+                            <li>zero plastic content</li>
+                            <li>lifetime durability</li>
+                        </ul>
+                        
+                        <div class="price-section">
+                            <div class="original-price">$59.99</div>
+                            <div class="current-price">$39.99</div>
+                            <div class="price-label">introductory price</div>
+                            <div class="savings-badge">save $20</div>
+                        </div>
+                        
+                        <div class="quantity-selector">
+                            <button class="quantity-btn" onclick="changeQuantity(3, -1)">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1" id="qty-3" readonly>
+                            <button class="quantity-btn" onclick="changeQuantity(3, 1)">+</button>
+                        </div>
+                        
+                        <button class="add-to-cart" onclick="orderProduct(3)">order bowl set</button>
+                        <button class="buy-now" onclick="orderProduct(3)">order now - save $20</button>
+                    </div>
+                </div>
+
+                <!-- Wooden Utensil Set -->
+                <div class="product-card">
+                    <div class="product-badge">handcrafted</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1574790398831-760d44bb7fd8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Wooden utensil set">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">wooden utensil collection</h3>
+                        <p class="product-description">hand-carved wooden tools from sustainable hardwood. perfect for maintaining pure sourdough cultures without synthetic material contact.</p>
+                        
+                        <ul class="product-features">
+                            <li>4 hand-carved utensils</li>
+                            <li>sustainable hardwood</li>
+                            <li>natural oil finish</li>
+                            <li>ergonomic design</li>
+                            <li>food-safe treatment</li>
+                            <li>artisan crafted</li>
+                        </ul>
+                        
+                        <div class="price-section">
+                            <div class="original-price">$44.99</div>
+                            <div class="current-price">$29.99</div>
+                            <div class="price-label">limited time offer</div>
+                            <div class="savings-badge">save $15</div>
+                        </div>
+                        
+                        <div class="quantity-selector">
+                            <button class="quantity-btn" onclick="changeQuantity(4, -1)">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1" id="qty-4" readonly>
+                            <button class="quantity-btn" onclick="changeQuantity(4, 1)">+</button>
+                        </div>
+                        
+                        <button class="add-to-cart" onclick="orderProduct(4)">order utensil set</button>
+                        <button class="buy-now" onclick="orderProduct(4)">order now - handcrafted</button>
+                    </div>
+                </div>
+
+                <!-- Natural Storage Bags -->
+                <div class="product-card">
+                    <div class="product-badge limited">limited stock</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Natural fiber storage bags">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">natural storage bags</h3>
+                        <p class="product-description">organic linen bags for bread storage and ingredient organization. breathable design maintains optimal moisture while eliminating plastic contamination.</p>
+                        
+                        <ul class="product-features">
+                            <li>3 organic linen bags</li>
+                            <li>small, medium, large sizes</li>
+                            <li>drawstring closure</li>
+                            <li>machine washable</li>
+                            <li>breathable natural fiber</li>
+                            <li>zero synthetic materials</li>
+                        </ul>
+                        
+                        <div class="price-section">
+                            <div class="original-price">$34.99</div>
+                            <div class="current-price">$24.99</div>
+                            <div class="price-label">while supplies last</div>
+                            <div class="savings-badge">save $10</div>
+                        </div>
+                        
+                        <div class="quantity-selector">
+                            <button class="quantity-btn" onclick="changeQuantity(5, -1)">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1" id="qty-5" readonly>
+                            <button class="quantity-btn" onclick="changeQuantity(5, 1)">+</button>
+                        </div>
+                        
+                        <button class="add-to-cart" onclick="orderProduct(5)">order storage bags</button>
+                        <button class="buy-now" onclick="orderProduct(5)">order now - only 18 left</button>
+                    </div>
+                </div>
+
+                <!-- Bamboo Proofing Baskets -->
+                <div class="product-card">
+                    <div class="product-badge">professional</div>
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1571115764595-644a1f56a55c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Bamboo proofing baskets">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">bamboo proofing baskets</h3>
+                        <p class="product-description">traditional banneton baskets handwoven from sustainable bamboo. creates beautiful spiral patterns while supporting optimal dough structure during final proof.</p>
+                        
+                        <ul class="product-features">
+                            <li>2 handwoven bamboo baskets</li>
+                            <li>round and oval shapes</li>
+                            <li>natural spiral pattern</li>
+                            <li>sustainable bamboo construction</li>
+                            <li>includes care instructions</li>
+                            <li>professional baker quality</li>
+                        </ul>
+                        
+                        <div class="price-section">
+                            <div class="original-price">$49.99</div>
+                            <div class="current-price">$34.99</div>
+                            <div class="price-label">professional grade</div>
+                            <div class="savings-badge">save $15</div>
+                        </div>
+                        
+                        <div class="quantity-selector">
+                            <button class="quantity-btn" onclick="changeQuantity(6, -1)">-</button>
+                            <input type="number" class="quantity-input" value="1" min="1" id="qty-6" readonly>
+                            <button class="quantity-btn" onclick="changeQuantity(6, 1)">+</button>
+                        </div>
+                        
+                        <button class="add-to-cart" onclick="orderProduct(6)">order proofing baskets</button>
+                        <button class="buy-now" onclick="orderProduct(6)">order now - professional grade</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="testimonials-container">
+            <h2 class="section-title">what our customers say</h2>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"finally found a company that takes plastic contamination seriously. the quality of these products is outstanding and you can really taste the difference in the bread."</p>
+                    <div class="testimonial-author">sarah m.</div>
+                    <div class="testimonial-location">denver, co</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"the starter kit arrived perfectly packaged without a single piece of plastic. the culture is incredibly active and healthy - exactly what i was hoping for."</p>
+                    <div class="testimonial-author">michael r.</div>
+                    <div class="testimonial-location">portland, or</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"as someone with multiple chemical sensitivities, these products are perfect. pure, clean, and effective. the wooden tools are beautifully crafted too."</p>
+                    <div class="testimonial-author">jennifer k.</div>
+                    <div class="testimonial-location">austin, tx</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guarantee Section -->
+    <section class="guarantee-section">
+        <div class="guarantee-container">
+            <h2 class="guarantee-title">our promises to you</h2>
+            
+            <div class="guarantee-grid">
+                <div class="guarantee-item">
+                    <div class="guarantee-icon">30</div>
+                    <h4>30-day guarantee</h4>
+                    <p class="guarantee-text">not completely satisfied? return for full refund, no questions asked</p>
+                </div>
+                
+                <div class="guarantee-item">
+                    <div class="guarantee-icon">free</div>
+                    <h4>free shipping</h4>
+                    <p class="guarantee-text">complimentary shipping on all orders over $75 anywhere in the us</p>
+                </div>
+                
+                <div class="guarantee-item">
+                    <div class="guarantee-icon">lab</div>
+                    <h4>lab tested purity</h4>
+                    <p class="guarantee-text">every batch tested for microplastic contamination using advanced spectrometry</p>
+                </div>
+                
+                <div class="guarantee-item">
+                    <div class="guarantee-icon">life</div>
+                    <h4>lifetime support</h4>
+                    <p class="guarantee-text">ongoing email guidance for starter care and troubleshooting</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bundle Section -->
+    <section class="bundle-section" id="bundle">
+        <div class="bundle-container">
+            <h2 class="bundle-title">complete transformation bundle</h2>
+            <p class="bundle-subtitle">everything you need to eliminate microplastics from your baking forever</p>
+            
+            <div class="bundle-card">
+                <ul class="bundle-items">
+                    <li>
+                        <span>complete starter kit</span>
+                        <span class="mono">$49.99</span>
+                    </li>
+                    <li>
+                        <span>2x starter culture refills</span>
+                        <span class="mono">$49.98</span>
+                    </li>
+                    <li>
+                        <span>glass mixing bowl set</span>
+                        <span class="mono">$39.99</span>
+                    </li>
+                    <li>
+                        <span>wooden utensil collection</span>
+                        <span class="mono">$29.99</span>
+                    </li>
+                    <li>
+                        <span>natural storage bags</span>
+                        <span class="mono">$24.99</span>
+                    </li>
+                    <li>
+                        <span>bamboo proofing baskets</span>
+                        <span class="mono">$34.99</span>
+                    </li>
+                    <li>
+                        <span>exclusive recipe collection (digital)</span>
+                        <span class="mono">$19.99</span>
+                    </li>
+                </ul>
+                
+                <div class="bundle-price-section">
+                    <div class="bundle-original">regular price: $249.92</div>
+                    <div class="bundle-savings">bundle price: $149.99</div>
+                    <p style="margin-top: 1rem; opacity: 0.8;">you save $99.93 (40% off)</p>
+                </div>
+                
+                <a href="#order" class="bundle-cta">get complete bundle - save 40%</a>
+                <p style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.7;">limited time offer - expires in 48 hours</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <p class="footer-text">&copy; 2025 flour department. crafting pure sourdough for a healthier world.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Quantity functionality
+        function changeQuantity(productId, change) {
+            const qtyInput = document.getElementById(`qty-${productId}`);
+            let currentQty = parseInt(qtyInput.value);
+            let newQty = currentQty + change;
+            
+            if (newQty >= 1) {
+                qtyInput.value = newQty;
+            }
+        }
+
+        function orderProduct(productId) {
+            const quantity = parseInt(document.getElementById(`qty-${productId}`).value);
+            
+            // Show success message
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'redirecting to order form...';
+            button.style.background = 'var(--success-green)';
+            
+            setTimeout(() => {
+                alert('Redirecting to secure order form...');
+                // In a real implementation, this would redirect to order form
+                button.textContent = originalText;
+                button.style.background = '';
+            }, 2000);
+        }
+
+        // Mobile menu functionality
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const navRight = document.getElementById('nav-right');
+
+        mobileToggle.addEventListener('click', function() {
+            navRight.classList.toggle('mobile-open');
+            
+            // Animate hamburger icon
+            const spans = this.querySelectorAll('span');
+            spans.forEach((span, index) => {
+                if (navRight.classList.contains('mobile-open')) {
+                    if (index === 0) span.style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    if (index === 1) span.style.opacity = '0';
+                    if (index === 2) span.style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                } else {
+                    span.style.transform = '';
+                    span.style.opacity = '';
+                }
+            });
+        });
+
+        // Close mobile menu when clicking on links
+        navRight.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+                navRight.classList.remove('mobile-open');
+                const spans = mobileToggle.querySelectorAll('span');
+                spans.forEach(span => {
+                    span.style.transform = '';
+                    span.style.opacity = '';
+                });
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Countdown timer for urgency
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const midnight = new Date();
+            midnight.setHours(24, 0, 0, 0);
+            const timeLeft = midnight.getTime() - now;
+            
+            const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            if (timeLeft > 0) {
+                const urgencyText = document.querySelector('.urgency-text');
+                urgencyText.innerHTML = `<i class="fas fa-fire"></i> limited time: free shipping ends in ${hours}h ${minutes}m ${seconds}s!`;
+            }
+        }
+
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Run immediately
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        // Handle window resize for responsive adjustments
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                navRight.classList.remove('mobile-open');
+                const spans = mobileToggle.querySelectorAll('span');
+                spans.forEach(span => {
+                    span.style.transform = '';
+                    span.style.opacity = '';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

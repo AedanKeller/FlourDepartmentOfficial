@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <!-- Google tag (gtag.js) -->
+ <script async src="https://www.googletagmanager.com/gtag/js?id=G-2VJDYJDHYZ"></script>
+ <script>
+   window.dataLayer = window.dataLayer || [];
+   function gtag(){dataLayer.push(arguments);}
+   gtag('js', new Date());
+ 
+   gtag('config', 'G-2VJDYJDHYZ');
+ </script>
+ 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starter Probe 01 - Flour Department</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Focus states for accessibility */
+        a:focus, button:focus, iframe:focus {
+            outline: 2px solid #64FFDA;
+            outline-offset: 2px;
+        }
+
+        body {
+            background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Stars background */
+        .stars-bg {
+            position: relative;
+        }
+
+        .stars-bg::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, rgba(100, 255, 218, 0.4), transparent),
+                radial-gradient(1px 1px at 40px 70px, rgba(255, 255, 255, 0.3), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(100, 255, 218, 0.2), transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.4), transparent),
+                radial-gradient(2px 2px at 200px 120px, rgba(100, 255, 218, 0.3), transparent),
+                radial-gradient(1px 1px at 250px 50px, rgba(255, 255, 255, 0.2), transparent),
+                radial-gradient(1px 1px at 300px 150px, rgba(100, 255, 218, 0.4), transparent),
+                radial-gradient(2px 2px at 350px 80px, rgba(255, 255, 255, 0.3), transparent);
+            background-repeat: repeat;
+            background-size: 400px 200px;
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.95);
+            border-bottom: 2px solid rgba(100, 255, 218, 0.3);
+            backdrop-filter: blur(15px);
+        }
+
+        .nav-logo {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.1rem, 4vw, 1.6rem);
+            font-weight: 700;
+            color: #64FFDA;
+            text-decoration: none;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-back {
+            color: #64FFDA;
+            text-decoration: none;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border: 1px solid rgba(100, 255, 218, 0.3);
+            background: rgba(100, 255, 218, 0.05);
+            font-size: clamp(0.8rem, 3vw, 1rem);
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            border-radius: 4px;
+        }
+
+        .nav-back:hover {
+            background: rgba(100, 255, 218, 0.1);
+            border-color: #64FFDA;
+        }
+
+        .nav-back::before {
+            content: "← ";
+            margin-right: 4px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 90px 20px 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .product-section {
+            background: rgba(100, 255, 218, 0.03);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 15px;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .product-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 12px;
+            margin: 0 auto 25px;
+            display: block;
+            border: 2px solid rgba(100, 255, 218, 0.3);
+            transition: all 0.3s ease;
+            background: radial-gradient(circle at center, rgba(100, 255, 218, 0.05) 0%, transparent 70%);
+            padding: 10px;
+        }
+
+        .product-image:hover {
+            transform: scale(1.02);
+            border-color: #64FFDA;
+            box-shadow: 0 0 25px rgba(100, 255, 218, 0.3);
+        }
+
+        .product-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.5rem, 6vw, 2.2rem);
+            font-weight: 700;
+            color: #64FFDA;
+            margin-bottom: 20px;
+            text-align: center;
+            letter-spacing: 0.05em;
+            line-height: 1.2;
+        }
+
+        .product-description {
+            font-size: clamp(1rem, 3.5vw, 1.1rem);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 25px;
+            text-align: center;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .launch-info {
+            background: linear-gradient(135deg, rgba(100, 255, 218, 0.08) 0%, rgba(100, 255, 218, 0.03) 100%);
+            border: 1px solid rgba(100, 255, 218, 0.3);
+            border-radius: 12px;
+            padding: 20px 15px;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .launch-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #64FFDA, transparent);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .launch-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            color: #64FFDA;
+            margin-bottom: 8px;
+            font-size: clamp(1rem, 4vw, 1.1rem);
+        }
+
+        .launch-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: clamp(0.9rem, 3.5vw, 0.95rem);
+            line-height: 1.5;
+        }
+
+        .contents {
+            margin-bottom: 30px;
+        }
+
+        .contents-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.2rem, 5vw, 1.4rem);
+            font-weight: 600;
+            color: #64FFDA;
+            margin-bottom: 20px;
+            text-align: center;
+            letter-spacing: 0.05em;
+        }
+
+        .contents-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            list-style: none;
+        }
+
+        .contents-item {
+            background: rgba(100, 255, 218, 0.05);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            padding: 18px 15px;
+            border-radius: 10px;
+            font-size: clamp(0.9rem, 3.5vw, 0.95rem);
+            color: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            line-height: 1.5;
+        }
+
+        .contents-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(100, 255, 218, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .contents-item:hover {
+            background: rgba(100, 255, 218, 0.08);
+            border-color: rgba(100, 255, 218, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .contents-item:hover::before {
+            animation: shimmer 0.6s ease-in-out;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+
+        .form-section {
+            background: rgba(100, 255, 218, 0.03);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 15px;
+            padding: 30px 20px;
+            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #64FFDA, transparent);
+            animation: scan 4s ease-in-out infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .form-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.3rem, 5vw, 1.6rem);
+            font-weight: 600;
+            color: #64FFDA;
+            margin-bottom: 15px;
+            text-align: center;
+            letter-spacing: 0.05em;
+        }
+
+        .form-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: clamp(1rem, 3.5vw, 1.05rem);
+            line-height: 1.5;
+        }
+
+        .google-form {
+            width: 100%;
+            height: 500px;
+            border: 1px solid rgba(100, 255, 218, 0.3);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.98);
+            transition: border-color 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .google-form:hover {
+            border-color: rgba(100, 255, 218, 0.5);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(100, 255, 218, 0.2);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: clamp(0.8rem, 3vw, 0.9rem);
+            font-family: 'Orbitron', monospace;
+            letter-spacing: 0.05em;
+        }
+
+        /* Tablet and larger screens */
+        @media (min-width: 768px) {
+            .navbar {
+                padding: 25px 40px;
+            }
+
+            .container {
+                padding: 120px 40px 40px;
+            }
+
+            .product-section, .form-section {
+                padding: 40px 30px;
+            }
+
+            .product-section {
+                margin-bottom: 40px;
+            }
+
+            .product-image {
+                max-width: 500px;
+                margin-bottom: 35px;
+                padding: 15px;
+            }
+
+            .product-description {
+                margin-bottom: 35px;
+            }
+
+            .launch-info {
+                padding: 25px;
+                margin-bottom: 35px;
+            }
+
+            .contents-list {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .contents-item {
+                padding: 20px;
+            }
+
+            .form-section {
+                padding: 40px;
+            }
+
+            .form-description {
+                margin-bottom: 30px;
+            }
+
+            .google-form {
+                height: 600px;
+            }
+
+            .footer {
+                margin-top: 60px;
+                padding-top: 30px;
+            }
+        }
+
+        /* Large screens */
+        @media (min-width: 1024px) {
+            .product-section, .form-section {
+                padding: 50px 40px;
+            }
+
+            .contents-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Very large screens */
+        @media (min-width: 1200px) {
+            .contents-list {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        /* Small mobile optimizations */
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 12px 15px;
+            }
+
+            .container {
+                padding: 85px 15px 30px;
+            }
+
+            .product-section, .form-section {
+                padding: 25px 15px;
+                border-radius: 12px;
+            }
+
+            .product-section {
+                margin-bottom: 25px;
+            }
+
+            .product-image {
+                padding: 8px;
+                margin-bottom: 20px;
+            }
+
+            .product-description {
+                margin-bottom: 20px;
+            }
+
+            .launch-info {
+                padding: 15px 12px;
+                margin-bottom: 20px;
+            }
+
+            .contents {
+                margin-bottom: 25px;
+            }
+
+            .contents-title {
+                margin-bottom: 15px;
+            }
+
+            .contents-list {
+                gap: 12px;
+            }
+
+            .contents-item {
+                padding: 15px 12px;
+            }
+
+            .form-description {
+                margin-bottom: 20px;
+            }
+
+            .google-form {
+                height: 450px;
+            }
+
+            .nav-back {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+
+            .nav-back::before {
+                content: "←";
+                margin-right: 2px;
+            }
+        }
+
+        /* Touch-friendly improvements */
+        @media (max-width: 767px) {
+            .nav-back {
+                min-height: 48px;
+                touch-action: manipulation;
+            }
+
+            .contents-item {
+                min-height: 60px;
+                display: flex;
+                align-items: center;
+            }
+
+            /* Improve form interaction on mobile */
+            .google-form {
+                touch-action: manipulation;
+            }
+
+            /* Better spacing for mobile reading */
+            .product-description, .launch-text, .form-description {
+                line-height: 1.7;
+            }
+        }
+
+        /* Landscape mobile optimization */
+        @media (max-width: 767px) and (orientation: landscape) {
+            .container {
+                padding-top: 75px;
+            }
+
+            .google-form {
+                height: 400px;
+            }
+        }
+
+        /* High DPI screens */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+            .product-image {
+                image-rendering: -webkit-optimize-contrast;
+                image-rendering: crisp-edges;
+            }
+        }
+
+        /* Reduced motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            .product-image,
+            .contents-item,
+            .nav-back {
+                transition: none;
+            }
+
+            .form-section::before {
+                animation: none;
+            }
+
+            .contents-item::before {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="stars-bg">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-logo">FLOUR DEPARTMENT</a>
+        <a href="index.html" class="nav-back">Back to main site</a>
+    </nav>
+
+    <div class="container">
+        <div class="product-section">
+            <img src="images/Display.png" alt="Flour Department Baking Kits" class="product-image">
+            
+            <h1 class="product-title">Flour Department Baking Kits</h1>
+            
+            <p class="product-description">
+                Beginner-friendly sourdough starter kits designed like a little science experiment. We've put together all the essential tools and ingredients to help you successfully grow and maintain your first wild yeast culture and bake up some delicious goods.
+            </p>
+
+            <div class="launch-info">
+                <div class="launch-title">Launching in 2 weeks</div>
+                <div class="launch-text">We're putting the finishing touches on packaging and want to hear from potential customers to make sure we get everything just right before we ship.</div>
+            </div>
+
+            <div class="contents">
+                <h3 class="contents-title">INCLUDED EQUIPMENT</h3>
+                <ul class="contents-list">
+                    <li class="contents-item">Laboratory-style glass beaker for hosting the starter</li>
+                    <li class="contents-item">Dehydrated sourdough starter culture</li>
+                    <li class="contents-item">Premium organic flour blend</li>
+                    <li class="contents-item">All of the ingredients needed for the baked good</li>
+                    <li class="contents-item">Step-by-step instruction guide</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2 class="form-title">INTERESTED?</h2>
+            <p class="form-description">
+                Fill out this form if you'd like to be notified when we launch, or if you have any feedback about the kit. No commitment required.
+            </p>
+
+            <iframe 
+                src="https://docs.google.com/forms/d/e/1FAIpQLSfABUgWbrDU3qcaCSNxBcMJUN1n6wx0tKrPwixJeOXffmUDnQ/viewform?embedded=true" 
+                class="google-form"
+                frameborder="0" 
+                marginheight="0" 
+                marginwidth="0"
+                title="Flour Department Interest Form">
+                Loading form...
+            </iframe>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 FLOUR DEPARTMENT</p>
+        </div>
+    </div>
+
+    <script>
+        // Subtle parallax effect for the product image (disabled on mobile for performance)
+        let ticking = false;
+        const isMobile = window.innerWidth <= 767;
+        
+        function updateParallax() {
+            if (isMobile) return; // Skip parallax on mobile for better performance
+            
+            const scrolled = window.pageYOffset;
+            const productImage = document.querySelector('.product-image');
+            if (productImage && scrolled < window.innerHeight) {
+                productImage.style.transform = `translateY(${scrolled * 0.03}px) scale(1)`;
+            }
+            ticking = false;
+        }
+
+        if (!isMobile) {
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(updateParallax);
+                    ticking = true;
+                }
+            });
+        }
+
+        // Optimize iframe loading on mobile
+        window.addEventListener('load', () => {
+            const iframe = document.querySelector('.google-form');
+            if (iframe) {
+                iframe.style.opacity = '1';
+            }
+        });
+
+        // Handle orientation changes
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                // Force a reflow to handle any layout issues after orientation change
+                const container = document.querySelector('.container');
+                container.style.minHeight = 'auto';
+                setTimeout(() => {
+                    container.style.minHeight = '';
+                }, 100);
+            }, 100);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sourdough Loaf Kit - Flour Department</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon-32x32.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --tan: #D4B896;
+            --dark-tan: #B39B7D;
+            --light-tan: #E8D5C4;
+            --black: #1A1A1A;
+            --white: #FFFFFF;
+            --cream: #FAF6F0;
+            --gray-600: #666666;
+            --gray-800: #333333;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--black);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 15px 0;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .header .container {
+            max-width: none;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.4rem, 4vw, 1.8rem);
+            font-weight: 700;
+            color: var(--black);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            z-index: 1001;
+        }
+
+        .nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav a {
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .nav a:hover {
+            color: var(--tan);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 5px;
+        }
+
+        .mobile-menu-btn span {
+            width: 24px;
+            height: 2px;
+            background: var(--black);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            padding: 80px 20px 20px;
+            flex-direction: column;
+            gap: 30px;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav a {
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--tan);
+        }
+
+        /* Page Title */
+        .page-title {
+            text-align: center;
+            padding: 100px 20px 40px;
+            background: var(--cream);
+        }
+
+        .page-title h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .page-title p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .product-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        /* Image Carousel Section */
+        .carousel-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .carousel-container {
+            position: relative;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--cream);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-placeholder {
+            background: linear-gradient(135deg, var(--tan) 0%, var(--dark-tan) 100%);
+            color: var(--black);
+            font-size: 18px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--black);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .carousel-nav:hover {
+            background: var(--white);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-nav:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .carousel-prev {
+            left: 15px;
+        }
+
+        .carousel-next {
+            right: 15px;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            padding: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--light-tan);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            padding: 0;
+        }
+
+        .dot.active {
+            background: var(--tan);
+            transform: scale(1.2);
+        }
+
+        /* Product Contents List */
+        .product-contents {
+            background: var(--cream);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .contents-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.3rem, 4vw, 1.5rem);
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--black);
+        }
+
+        .contents-list {
+            list-style: none;
+        }
+
+        .contents-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--light-tan);
+            display: flex;
+            align-items: flex-start;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            color: var(--gray-800);
+            line-height: 1.5;
+        }
+
+        .contents-list li:last-child {
+            border-bottom: none;
+        }
+
+        .contents-list li::before {
+            content: "✓";
+            color: var(--tan);
+            font-weight: bold;
+            margin-right: 12px;
+            font-size: 1.1rem;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        /* Survey Section */
+        .survey-section {
+            background: var(--cream);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            min-height: fit-content;
+        }
+
+        .survey-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            font-weight: 600;
+            color: var(--black);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .survey-description {
+            color: var(--gray-600);
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-size: clamp(1rem, 3vw, 1.1rem);
+        }
+
+        .survey-container {
+            background: var(--white);
+            border: 2px solid var(--light-tan);
+            border-radius: 8px;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        .survey-container iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+            display: block;
+        }
+
+        /* Fallback placeholder styling */
+        .survey-placeholder {
+            background: var(--white);
+            border: 2px dashed var(--light-tan);
+            border-radius: 8px;
+            padding: 60px 30px;
+            text-align: center;
+            color: var(--gray-600);
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .survey-placeholder h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 15px;
+            color: var(--black);
+            font-size: 1.5rem;
+        }
+
+        .survey-placeholder p {
+            font-size: 1rem;
+            max-width: 350px;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+        .survey-placeholder .instructions {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .header {
+                padding: 12px 0;
+            }
+
+            .header .container {
+                padding: 0 20px;
+            }
+
+            .page-title {
+                padding: 80px 20px 30px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .product-layout {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .carousel-wrapper {
+                height: 350px;
+            }
+
+            .carousel-nav {
+                width: 44px;
+                height: 44px;
+                font-size: 16px;
+            }
+
+            .carousel-prev {
+                left: 10px;
+            }
+
+            .carousel-next {
+                right: 10px;
+            }
+
+            .survey-section {
+                padding: 25px 20px;
+            }
+
+            .survey-container iframe {
+                height: 700px;
+            }
+
+            .product-contents {
+                padding: 25px 20px;
+            }
+
+            .carousel-dots {
+                gap: 8px;
+                margin-bottom: 25px;
+            }
+
+            .dot {
+                width: 14px;
+                height: 14px;
+                -webkit-tap-highlight-color: transparent;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header .container {
+                padding: 0 15px;
+            }
+
+            .page-title {
+                padding: 70px 15px 25px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .carousel-wrapper {
+                height: 280px;
+            }
+
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 14px;
+            }
+
+            .carousel-prev {
+                left: 8px;
+            }
+
+            .carousel-next {
+                right: 8px;
+            }
+
+            .product-contents,
+            .survey-section {
+                padding: 20px 15px;
+            }
+
+            .survey-container iframe {
+                height: 650px;
+            }
+
+            .contents-list li {
+                padding: 10px 0;
+            }
+
+            .carousel-dots {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .carousel-wrapper {
+                height: 250px;
+            }
+
+            .survey-container iframe {
+                height: 600px;
+            }
+
+            .carousel-nav {
+                width: 36px;
+                height: 36px;
+                font-size: 12px;
+            }
+        }
+
+        /* Touch improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .carousel-nav:hover {
+                transform: translateY(-50%);
+                background: rgba(255, 255, 255, 0.9);
+            }
+            
+            .dot:hover {
+                transform: none;
+            }
+            
+            .dot.active {
+                transform: scale(1.3);
+            }
+        }
+
+        /* Prevent zoom on input focus on iOS */
+        @media screen and (-webkit-min-device-pixel-ratio: 0) {
+            input, select, textarea, button {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">flour department</a>
+                <nav class="nav">
+                    <a href="index.html">Home</a>
+                    <a href="index.html#story">Our Story</a>
+                    <a href="index.html#join">Join</a>
+                </nav>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html" onclick="closeMobileMenu()">Home</a>
+            <a href="index.html#story" onclick="closeMobileMenu()">Our Story</a>
+            <a href="index.html#join" onclick="closeMobileMenu()">Join</a>
+        </nav>
+    </header>
+
+    <!-- Page Title -->
+    <section class="page-title">
+        <h1>Sourdough Pretzel Baking Mix</h1>
+        <p>Makes 4 Divine Sourdough Pretzels</p>
+    </section>
+
+    <div class="container">
+        <div class="product-layout">
+            <!-- Left Side: Image Carousel and Contents -->
+            <div class="carousel-section">
+                <!-- Image Carousel -->
+                <div class="carousel-container">
+                    <div class="carousel-wrapper">
+                        <div class="carousel-slide active">
+                            <div class="carousel-placeholder"><img src="pretzealone.png" alt="Sourdough loaf"></div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="carousel-placeholder"><img src="productpretzel.png" alt="Product with loaf"></div>
+                        </div>
+                        <div class="carousel-slide">
+                            <div class="carousel-placeholder"><img src="2pretzels.jpg" alt="Freshly baked bread"></div>
+                        </div>
+                    </div>
+                    
+                    <button class="carousel-nav carousel-prev" onclick="changeSlide(-1)" aria-label="Previous image">‹</button>
+                    <button class="carousel-nav carousel-next" onclick="changeSlide(1)" aria-label="Next image">›</button>
+                </div>
+
+                <div class="carousel-dots">
+                    <button class="dot active" onclick="currentSlide(1)" aria-label="View image 1"></button>
+                    <button class="dot" onclick="currentSlide(2)" aria-label="View image 2"></button>
+                    <button class="dot" onclick="currentSlide(3)" aria-label="View image 3"></button>
+                </div>
+
+                <!-- Product Contents List -->
+                <div class="product-contents">
+                    <h3 class="contents-title">What's Included</h3>
+                    <ul class="contents-list">
+                        <li>Active sourdough starter (dehydrated)</li>
+                        <li>Pre-measured ingredients for 4 sourdough pretzels</li>
+                        <li>Extra packet of sourdough starter</li>
+                        <li>Mason jar for your sourdough to grow in</li>
+                        <li>Step-by-step recipe card</li>
+                        <li>Troubleshooting guide</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Side: Google Survey -->
+            <div class="survey-section">
+                <h2 class="survey-title">Launching in 2 Weeks!</h2>
+                <p class="survey-description">
+                    Share your thoughts to help us improve — and get an awesome discount when we launch!
+                </p>
+                
+                <div class="survey-container">
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfABUgWbrDU3qcaCSNxBcMJUN1n6wx0tKrPwixJeOXffmUDnQ/viewform?embedded=true" width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            currentSlideIndex += direction;
+            
+            if (currentSlideIndex >= slides.length) {
+                currentSlideIndex = 0;
+            } else if (currentSlideIndex < 0) {
+                currentSlideIndex = slides.length - 1;
+            }
+            
+            showSlide(currentSlideIndex);
+        }
+
+        function currentSlide(index) {
+            currentSlideIndex = index - 1;
+            showSlide(currentSlideIndex);
+        }
+
+        // Mobile menu functions
+        function toggleMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.toggle('active');
+            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+        }
+
+        function closeMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (!mobileNav.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+                closeMobileMenu();
+            }
+        });
+
+        // Auto-advance carousel every 6 seconds (increased for mobile)
+        let autoAdvanceInterval = setInterval(() => {
+            changeSlide(1);
+        }, 6000);
+
+        // Pause auto-advance when user interacts with carousel
+        const carouselContainer = document.querySelector('.carousel-container');
+        carouselContainer.addEventListener('touchstart', () => {
+            clearInterval(autoAdvanceInterval);
+        });
+
+        carouselContainer.addEventListener('touchend', () => {
+            autoAdvanceInterval = setInterval(() => {
+                changeSlide(1);
+            }, 6000);
+        });
+
+        // Handle swipe gestures on mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        carouselContainer.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        carouselContainer.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const difference = touchStartX - touchEndX;
+            
+            if (Math.abs(difference) > swipeThreshold) {
+                if (difference > 0) {
+                    changeSlide(1); // Swipe left - next slide
+                } else {
+                    changeSlide(-1); // Swipe right - previous slide
+                }
+            }
+        }
+
+        // Prevent zoom on double tap for iOS Safari
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    </script>
+</body>
+</html>

@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2VJDYJDHYZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-2VJDYJDHYZ');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flour Department - Sourdough That's Out of This World</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --tan: #D4B896;
+            --dark-tan: #B39B7D;
+            --light-tan: #E8D5C4;
+            --black: #1A1A1A;
+            --white: #FFFFFF;
+            --cream: #FAF6F0;
+        }
+
+        body {
+            background-color: var(--cream);
+            color: var(--black);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: clamp(1rem, 2.5vw, 1.125rem);
+            line-height: 1.8;
+            color: var(--black);
+            opacity: 0.85;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px;
+            background: var(--cream);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: var(--cream);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--black);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--dark-tan);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 12px 28px;
+            background: var(--black);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid var(--black);
+        }
+
+        .nav-cta:hover {
+            background: transparent;
+            color: var(--black);
+        }
+
+        /* Mobile Menu */
+        .burger-menu {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .burger-line {
+            width: 25px;
+            height: 2px;
+            background: var(--black);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--cream);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            text-align: center;
+        }
+
+        .mobile-menu li {
+            margin: 25px 0;
+        }
+
+        .mobile-menu a {
+            color: var(--black);
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: var(--black);
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            min-height: 600px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: var(--black);
+            margin-top: 0;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 0 20px;
+            color: var(--white);
+        }
+
+        .hero h1 {
+            margin-bottom: 1rem;
+            font-weight: 900;
+        }
+
+        .hero .tagline {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            letter-spacing: 0.02em;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            color: var(--white);
+        }
+
+        .hero-cta {
+            padding: 18px 40px;
+            background: var(--tan);
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: 2px solid var(--tan);
+        }
+
+        .hero-cta:hover {
+            background: transparent;
+            color: var(--tan);
+        }
+
+        /* Product Showcase Section */
+        .product-showcase {
+            padding: 100px 0;
+            background: var(--cream);
+        }
+
+        .showcase-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 80px;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .product-box {
+            background: var(--white);
+            border: 1px solid var(--light-tan);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-box-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+
+        .product-box-content {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .product-box h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .product-box p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .product-box-cta {
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid var(--tan);
+            transition: all 0.3s ease;
+        }
+
+        .product-box-cta:hover {
+            color: var(--dark-tan);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 100px 0;
+            overflow: hidden;
+        }
+
+        .content-section:nth-child(even) {
+            background: var(--white);
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .content-wrapper.reverse {
+            direction: rtl;
+        }
+
+        .content-wrapper.reverse > * {
+            direction: ltr;
+        }
+
+        .content-text {
+            max-width: 500px;
+        }
+
+        .content-text h2 {
+            color: var(--black);
+            margin-bottom: 2rem;
+        }
+
+        .content-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .content-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .content-features li {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--light-tan);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .content-features li::before {
+            content: "✓";
+            color: var(--dark-tan);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .content-image {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            border-radius: 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-cta {
+            display: inline-block;
+            padding: 15px 35px;
+            background: var(--black);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            border: 2px solid var(--black);
+        }
+
+        .content-cta:hover {
+            background: transparent;
+            color: var(--black);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 0;
+            background: var(--black);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: var(--white);
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-size: 1.2rem;
+        }
+
+        .cta-button {
+            padding: 18px 50px;
+            background: var(--tan);
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: 2px solid var(--tan);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--tan);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 60px 0 30px;
+            background: var(--cream);
+            border-top: 1px solid var(--light-tan);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--black);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--light-tan);
+            opacity: 0.6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .content-wrapper.reverse {
+                direction: ltr;
+            }
+
+            .content-image {
+                height: 400px;
+                order: -1;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .burger-menu {
+                display: flex;
+            }
+
+            .hero {
+                min-height: 100vh;
+            }
+
+            .hero-video {
+                object-position: center;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .content-section {
+                padding: 60px 0;
+            }
+
+            .content-text {
+                text-align: center;
+                max-width: 100%;
+            }
+
+            .content-image {
+                height: 300px;
+            }
+
+            .showcase-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .product-box-image {
+                height: 250px;
+            }
+
+            .cta-section {
+                padding: 80px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 15px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.3rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-cta {
+                padding: 15px 30px;
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .content-features li {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Performance optimizations for mobile */
+        @media (max-width: 768px) {
+            .hero-video {
+                /* Optimize video for mobile */
+                image-rendering: optimizeSpeed;
+            }
+
+            img {
+                /* Lazy loading for images */
+                loading: lazy;
+            }
+
+            /* Reduce animations on mobile */
+            * {
+                animation-duration: 0.3s !important;
+                transition-duration: 0.3s !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">flour department</a>
+            <ul class="nav-links">
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#kits">Mission Kits</a></li>
+                <li><a href="#contact" class="nav-cta">Get Started</a></li>
+            </ul>
+            <button class="burger-menu" id="burgerMenu">
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" id="closeMenu">&times;</button>
+        <ul>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#kits">Mission Kits</a></li>
+            <li><a href="#contact">Get Started</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="Flour Department.mp4" type="video/mp4">
+        </video>
+        <div class="hero-content">
+            <h1>flour department</h1>
+            <p class="tagline">Sourdough that's out of this world.</p>
+            <p>Make your own sourdough — the easy way. With Flour Department kits.</p>
+            <a href="#products" class="hero-cta">Explore Mission Kits</a>
+        </div>
+    </section>
+
+    <!-- Product Showcase -->
+    <section class="product-showcase" id="products">
+        <div class="container">
+            <div class="showcase-header">
+                <h2>Choose Your Mission</h2>
+                <p>Each kit contains everything you need to create artisanal sourdough at home. Laboratory-grade tools meet time-tested techniques.</p>
+            </div>
+            
+            <div class="showcase-grid">
+                <div class="product-box">
+                    <img src="images/BOX PIZZA.png" alt="Pizza Kit" class="product-box-image">
+                    <div class="product-box-content">
+                        <h3>Pizza Mission Kit</h3>
+                        <p>Transform your kitchen into a pizzeria with our sourdough pizza dough kit.</p>
+                        <a href="sourdoughloaf.html" class="product-box-cta">Learn More →</a>
+                    </div>
+                </div>
+
+                <div class="product-box">
+                    <img src="images/BOXCINNAMON.png" alt="Cinnamon Roll Kit" class="product-box-image">
+                    <div class="product-box-content">
+                        <h3>Cinnamon Roll Mission</h3>
+                        <p>Sweet, soft, and scientifically perfect sourdough cinnamon rolls.</p>
+                        <a href="sourdoughloaf.html" class="product-box-cta">Learn More →</a>
+                    </div>
+                </div>
+
+                <div class="product-box">
+                    <img src="images/BOXSOURDOUGHLOAF.png" alt="Classic Loaf Kit" class="product-box-image">
+                    <div class="product-box-content">
+                        <h3>Classic Loaf Mission</h3>
+                        <p>Master the art of the perfect sourdough loaf with our flagship kit.</p>
+                        <a href="sourdoughloaf.html" class="product-box-cta">Learn More →</a>
+                    </div>
+                </div>
+
+                <div class="product-box">
+                    <img src="images/BOXPRETZEL.png" alt="Pretzel Kit" class="product-box-image">
+                    <div class="product-box-content">
+                        <h3>Pretzel Mission Kit</h3>
+                        <p>Soft, salty perfection. Create authentic sourdough pretzels at home.</p>
+                        <a href="sourdoughloaf.html" class="product-box-cta">Learn More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What's Inside Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="content-wrapper">
+                <div class="content-text">
+                    <h2>What's Inside Your Mission Kit</h2>
+                    <p>Every Flour Department kit is carefully curated with premium ingredients and professional-grade tools. We've taken the guesswork out of sourdough baking.</p>
+                    <ul class="content-features">
+                        <li>Laboratory-grade glass beaker for precise measurements</li>
+                        <li>Handcrafted dehydrated sourdough starter</li>
+                        <li>Premium organic flour blend</li>
+                        <li>Step-by-step mission instructions</li>
+                        <li>All specialty ingredients included</li>
+                    </ul>
+                    <a href="#" class="content-cta">View All Kits</a>
+                </div>
+                <img src="beaker.png" alt="Laboratory Beaker" class="content-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Perfect Gift Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="content-wrapper reverse">
+                <div class="content-text">
+                    <h2>The Perfect Gift for Curious Minds</h2>
+                    <p>Give the gift of discovery. Our mission kits combine the joy of baking with the thrill of scientific exploration. Perfect for food lovers, science enthusiasts, or anyone who appreciates the art of fermentation.</p>
+                    <ul class="content-features">
+                        <li>Beautiful packaging ready for gifting</li>
+                        <li>Suitable for beginners and experts alike</li>
+                        <li>Creates lasting memories and delicious results</li>
+                        <li>Encourages experimentation and learning</li>
+                    </ul>
+                    <a href="#" class="content-cta">Shop Gift Sets</a>
+                </div>
+                <img src="flour.png" alt="Premium Ingredients" class="content-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- The Science Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="content-wrapper">
+                <div class="content-text">
+                    <h2>The Science of Sourdough</h2>
+                    <p>Watch as wild yeast and beneficial bacteria work their magic. Our dehydrated starter awakens in your beaker, bubbling with life as it transforms simple ingredients into complex, flavorful bread.</p>
+                    <ul class="content-features">
+                        <li>Learn about fermentation and microbiology</li>
+                        <li>Understand the chemistry of bread making</li>
+                        <li>Experiment with timing and temperature</li>
+                        <li>Create your own sourdough variations</li>
+                    </ul>
+                    <a href="#" class="content-cta">Discover the Process</a>
+                </div>
+                <img src="sourdoughstarter.png" alt="Sourdough Starter" class="content-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="container">
+            <h2>Ready to Start Your Mission?</h2>
+            <p>Join thousands of home bakers who've discovered the joy of scientific sourdough. Your kitchen laboratory awaits.</p>
+            <a href="#products" class="cta-button">Choose Your Kit</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>flour department</h3>
+                    <p>Sourdough that's out of this world.</p>
+                    <p style="margin-top: 20px;">Contact: rideforall@gmail.com<br>Phone: (540) 642-8215</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="#">All Kits</a></li>
+                        <li><a href="#">Gift Sets</a></li>
+                        <li><a href="#">Accessories</a></li>
+                        <li><a href="#">Starter Cultures</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="#">Getting Started</a></li>
+                        <li><a href="#">Science of Sourdough</a></li>
+                        <li><a href="#">Recipes</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Flour Department. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        const burgerMenu = document.getElementById('burgerMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMenu = document.getElementById('closeMenu');
+
+        burgerMenu.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Optimize video for mobile
+        const heroVideo = document.querySelector('.hero-video');
+        if (window.innerWidth <= 768) {
+            // Reduce video quality on mobile to prevent lag
+            heroVideo.setAttribute('playsinline', '');
+            heroVideo.playbackRate = 1.0;
+        }
+
+        // Lazy loading for images
+        if ('loading' in HTMLImageElement.prototype) {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                if (!img.src.includes('BOX')) { // Don't lazy load product boxes
+                    img.loading = 'lazy';
+                }
+            });
+        }
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Apply animations to content sections
+        document.querySelectorAll('.content-wrapper, .product-box').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
+            

@@ -1,0 +1,17 @@
+{
+  "newsletter": [
+    {
+      "email": "vikingslug@gmail.com",
+      "timestamp": "2025-07-30T17:38:35.937Z",
+      "source": "newsletter"
+    }
+  ],
+  "discount": [
+    {
+      "email": "vikingslug@gmail.com",
+      "timestamp": "2025-07-30T17:37:52.760Z",
+      "source": "discount_popup",
+      "discountCode": "SOURDOUGH10"
+    }
+  ]
+}

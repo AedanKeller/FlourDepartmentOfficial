@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flour Department - Sourdough Recipes</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600&family=JetBrains+Mono:wght@200;300;400&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-black: #2c2c2c;
+            --soft-black: #3a3a3a;
+            --light-gray: #faf9f7;
+            --mid-gray: #e8e5e0;
+            --text-gray: #8b7355;
+            --pure-white: #ffffff;
+            --accent-line: #2c2c2c;
+            --warm-brown: #d4c4b0;
+            --light-brown: #f5f0e8;
+            --pastel-blue: #e8f2f8;
+            --soft-blue: #d2e6f4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+            color: var(--primary-black);
+            background: var(--light-brown);
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 300;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--warm-brown);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: var(--primary-black);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            text-transform: lowercase;
+        }
+
+        /* Updated navigation links positioning */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-gray);
+            font-weight: 300;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+            text-transform: lowercase;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-black);
+        }
+
+        .nav-links a.active {
+            color: var(--primary-black);
+            font-weight: 400;
+        }
+
+        .cta-button {
+            background: var(--soft-blue);
+            color: var(--primary-black);
+            padding: 0.75rem 2rem;
+            border: none;
+            font-weight: 300;
+            text-transform: lowercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.85rem;
+            border-radius: 25px;
+        }
+
+        .cta-button:hover {
+            background: var(--pastel-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Mobile menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            padding: 8px;
+        }
+
+        .mobile-menu-toggle span {
+            width: 20px;
+            height: 2px;
+            background: var(--primary-black);
+            transition: 0.3s;
+            border-radius: 1px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--light-brown) 0%, var(--pastel-blue) 100%);
+            padding-top: 100px;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 300;
+            line-height: 1.1;
+            color: var(--primary-black);
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            line-height: 1.7;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Recipe Grid Section */
+        .recipes-section {
+            padding: clamp(6rem, 10vw, 8rem) 0;
+            background: var(--pure-white);
+        }
+
+        .recipes-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 6vw, 2.5rem);
+            text-align: center;
+            color: var(--primary-black);
+            margin-bottom: clamp(3rem, 8vw, 6rem);
+            font-weight: 300;
+            letter-spacing: -0.01em;
+        }
+
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            align-items: stretch;
+        }
+
+        .recipe-card {
+            background: var(--light-brown);
+            border: 1px solid var(--warm-brown);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-height: 650px;
+        }
+
+        .recipe-card:nth-child(1) { animation-delay: 0.2s; }
+        .recipe-card:nth-child(2) { animation-delay: 0.4s; }
+        .recipe-card:nth-child(3) { animation-delay: 0.6s; }
+        .recipe-card:nth-child(4) { animation-delay: 0.8s; }
+        .recipe-card:nth-child(5) { animation-delay: 1.0s; }
+        .recipe-card:nth-child(6) { animation-delay: 1.2s; }
+
+        .recipe-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .recipe-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .recipe-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(20%) saturate(80%);
+            transition: filter 0.6s ease, transform 0.3s ease;
+        }
+
+        .recipe-card:hover .recipe-image img {
+            filter: sepia(10%) saturate(100%);
+            transform: scale(1.05);
+        }
+
+        .recipe-meta {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 300;
+            color: var(--text-gray);
+        }
+
+        .recipe-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            min-height: 400px;
+        }
+
+        .recipe-title {
+            font-size: clamp(1.2rem, 3vw, 1.4rem);
+            margin-bottom: 1rem;
+            font-weight: 400;
+            text-transform: lowercase;
+            letter-spacing: 0.02em;
+            flex-shrink: 0;
+        }
+
+        .recipe-description {
+            color: var(--text-gray);
+            line-height: 1.6;
+            font-size: clamp(0.85rem, 2vw, 0.9rem);
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+            min-height: 80px;
+        }
+
+        .recipe-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--pastel-blue);
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .stat {
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            text-transform: lowercase;
+            color: var(--text-gray);
+            margin-bottom: 0.25rem;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: var(--primary-black);
+        }
+
+        .recipe-button {
+            background: var(--soft-blue);
+            color: var(--primary-black);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            font-weight: 300;
+            text-transform: lowercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.85rem;
+            border-radius: 20px;
+            width: 100%;
+            text-align: center;
+            margin-top: auto;
+            flex-shrink: 0;
+        }
+
+        .recipe-button:hover {
+            background: var(--pastel-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Recipe Detail Modal - Enhanced for mobile blur */
+        .recipe-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        /* Enhanced background blur with multiple layers for better mobile support */
+        .recipe-modal::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: -1;
+        }
+
+        .recipe-modal::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: -1;
+        }
+
+        /* Fallback blur for browsers that don't support backdrop-filter */
+        .recipe-modal.no-backdrop-filter::after {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
+        .modal-content {
+            background: var(--pure-white);
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            animation: fadeInUp 0.3s ease-out;
+            z-index: 1;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--warm-brown);
+        }
+
+        .modal-image {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            text-transform: lowercase;
+        }
+
+        .modal-description {
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .ingredients-section,
+        .instructions-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            text-transform: lowercase;
+            color: var(--primary-black);
+            border-bottom: 2px solid var(--warm-brown);
+            padding-bottom: 0.5rem;
+        }
+
+        .ingredients-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ingredients-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--mid-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ingredient-name {
+            font-weight: 300;
+        }
+
+        .ingredient-amount {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+
+        .instructions-list {
+            counter-reset: step-counter;
+            list-style: none;
+            padding: 0;
+        }
+
+        .instructions-list li {
+            counter-increment: step-counter;
+            margin-bottom: 1.5rem;
+            padding-left: 3rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .instructions-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: var(--soft-blue);
+            color: var(--primary-black);
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 300;
+        }
+
+        .recipe-notes {
+            background: var(--light-brown);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            border-left: 4px solid var(--warm-brown);
+        }
+
+        .notes-title {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+            text-transform: lowercase;
+        }
+
+        .notes-text {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Blur the main content when modal is open */
+        body.modal-open .navbar,
+        body.modal-open .recipes-section {
+            filter: blur(4px);
+            -webkit-filter: blur(4px);
+            transition: filter 0.3s ease;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .nav-container {
+                padding: 2rem 3rem;
+            }
+            
+            .hero-container,
+            .recipes-container {
+                padding: 0 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-right {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                border-top: 1px solid var(--warm-brown);
+                padding: 2rem;
+                flex-direction: column;
+                gap: 1.5rem;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            }
+            
+            .nav-right.mobile-open {
+                display: flex;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1.5rem;
+                order: 1;
+            }
+
+            .cta-button {
+                order: 2;
+                margin-top: 1rem;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .hero {
+                padding-top: 120px;
+                min-height: 40vh;
+            }
+            
+            .recipe-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .recipe-modal {
+                padding: 1rem;
+            }
+            
+            .modal-body {
+                padding: 1.5rem;
+            }
+            
+            .modal-title {
+                font-size: 1.5rem;
+            }
+
+            /* Enhanced mobile blur effects */
+            .recipe-modal::after {
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 1rem 1.5rem;
+            }
+            
+            .hero-container,
+            .recipes-container {
+                padding: 0 1.5rem;
+            }
+            
+            .recipe-card {
+                min-height: auto;
+            }
+
+            /* Stronger background for very small screens */
+            .recipe-modal::before {
+                background: rgba(0, 0, 0, 0.9);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="home.html" class="logo">flour department</a>
+            
+            <div class="nav-right" id="nav-right">
+                <ul class="nav-links">
+                    <li><a href="home.html">home</a></li>
+                    <li><a href="#recipes" class="active">recipes</a></li>
+                    <li><a href="#about">about</a></li>
+                    <li><a href="home.html#contact">contact</a></li>
+                </ul>
+                
+                <a href="index.html" class="cta-button">order culture</a>
+            </div>
+            
+            <div class="mobile-menu-toggle" id="mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+    <br><br><br>
+    <section class="recipes-section" id="recipes">
+        <div class="recipes-container">
+            <h2 class="section-title">sourdough recipes</h2>
+            <div class="recipe-grid">
+                <!-- Classic Sourdough -->
+                <div class="recipe-card" data-recipe="classic-sourdough">
+                    <div class="recipe-image">
+                        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Classic sourdough bread">
+                        <div class="recipe-meta">beginner</div>
+                    </div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">classic flour department loaf</h3>
+                        <p class="recipe-description">the foundational recipe for your flour department starter. a perfectly balanced, crusty exterior with an open, airy crumb that showcases the complex flavors of natural fermentation.</p>
+                        
+                        <div class="recipe-stats">
+                            <div class="stat">
+                                <div class="stat-label">prep time</div>
+                                <div class="stat-value">30 min</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-label">ferment</div>
+                                <div class="stat-value">18 hrs</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-label">bake</div>
+                                <div class="stat-value">45 min</div>
+                            </div>
+                        </div>
+                        
+                        <button class="recipe-button" onclick="openRecipe('classic-sourdough')">view recipe</button>
+                    </div>
+                </div>
+
+                <!-- Pancakes -->
+                <div class="recipe-card" data-recipe="pancakes">
+                    <div class="recipe-image">
+                        <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sourdough pancakes">
+                        <div class="recipe-meta">quick</div>
+                    </div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">weekend flour department pancakes</h3>
+                        <p class="recipe-description">fluffy, tangy pancakes made with flour department starter discard. a delicious way to reduce waste while creating memorable weekend breakfasts.</p>
+                        
+                        <div class="recipe-stats">
+                            <div class="stat">
+                                <div class="stat-label">prep time</div>
+                                <div class="stat-value">10 min</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-label">ferment</div>
+                                <div class="stat-value">overnight</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-label">cook</div>
+                                <div class="stat-value">15 min</div>
+                            </div>
+                        </div>
+                        
+                        <button class="recipe-button" onclick="openRecipe('pancakes')">view recipe</button>
+                    </div>
+                </div>
+
+                <!-- Waffles -->
+                <div class="recipe-card" data-recipe="waffles">
+                    <div class="recipe-image">
+                        <img src="https://images.unsplash.com/photo-1562376552-0d160dcec87d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sourdough waffles">
+                        <div class="recipe-meta">quick</div>
+                    </div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">crispy flour department waffles</h3>
+                        <p class="recipe-description">golden, crispy waffles with tender interiors. the perfect vehicle for maple syrup and fresh berries, made with overnight fermented batter.</p>
+                        
+                        <div class="recipe-stats">
+                            <div class="stat">
+                                <div class="stat-label">prep time</div>
+                                <div class="stat-value">15 min</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-label">ferment</div>
+                                <div class="stat-value">overnight</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-label">cook</div>
+                                <div class="stat-value">20 min</div>
+                            </div>
+                        </div>
+                        
+                        <button class="recipe-button" onclick="openRecipe('waffles')">view recipe</button>
+                    </div>
+                </div>
+
+                <!-- Pizza -->
+                <div class="recipe-card" data-recipe="pizza">
+                    <div class="recipe-image">
+                        <img src="https://images.unsplash.com/photo-1571115764595-644a1f56a55c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sourdough pizza">
+                        <div class="recipe-meta">intermediate</div>
+                    </div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">artisan flour department pizza</h3>
+                        <p class="recipe-description">crispy-bottomed pizza with complex flavor from slow fermentation. your flour department starter creates the perfect base for any topping combination.</p>
+                        
+                        <div class="recipe-stats">
+                            <div class="stat">
+                                <div class="stat-label">prep time</div>
+                                <div class="stat-value">25 min</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-label">ferment</div>
+                                <div class="stat-value">6 hrs</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-label">bake</div>
+                                <div class="stat-value">12 min</div>
+                            </div>
+                        </div>
+                        
+                        <button class="recipe-button" onclick="openRecipe('pizza')">view recipe</button>
+                    </div>
+                </div>
+
+                <!-- Focaccia -->
+                <div class="recipe-card" data-recipe="focaccia">
+                    <div class="recipe-image">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sourdough focaccia">
+                        <div class="recipe-meta">beginner</div>
+                    </div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">flour department focaccia</h3>
+                        <p class="recipe-description">light, airy focaccia with a golden crust. perfect canvas for seasonal toppings and herbs, showcasing the versatility of your flour department starter.</p>
+                        
+                        <div class="recipe-stats">
+                            <div class="stat">
+                                <div class="stat-label">prep time</div>
+                                <div class="stat-value">20 min</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-label">ferment</div>
+                                <div class="stat-value">12 hrs</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-label">bake</div>
+                                <div class="stat-value">25 min</div>
+                            </div>
+                        </div>
+                        
+                        <button class="recipe-button" onclick="openRecipe('focaccia')">view recipe</button>
+                    </div>
+                </div>
+
+                <!-- Sandwich Bread -->
+                <div class="recipe-card" data-recipe="sandwich-bread">
+                    <div class="recipe-image">
+                        <img src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sourdough sandwich bread">
+                        <div class="recipe-meta">beginner</div>
+                    </div>
+                    <div class="recipe-content">
+                        <h3 class="recipe-title">everyday sandwich bread</h3>
+                        <p class="recipe-description">soft, sliceable bread perfect for sandwiches and toast. a more tender crumb than artisan loaves while maintaining sourdough's complex flavor.</p>
+                        
+                        <div class="recipe-stats">
+                            <div class="stat">
+                                <div class="stat-label">prep time</div>
+                                <div class="stat-value">25 min</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-label">ferment</div>
+                                <div class="stat-value">12 hrs</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-label">bake</div>
+                                <div class="stat-value">40 min</div>
+                            </div>
+                        </div>
+                        
+                        <button class="recipe-button" onclick="openRecipe('sandwich-bread')">view recipe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Classic Sourdough Modal -->
+    <div class="recipe-modal" id="modal-classic-sourdough">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-image" style="background-image: url('https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+            <div class="modal-body">
+                <h2 class="modal-title">classic flour department loaf</h2>
+                <p class="modal-description">the foundational recipe that showcases your flour department starter at its finest. this classic sourdough develops complex flavors through long fermentation.</p>
+                
+                <div class="ingredients-section">
+                    <h3 class="section-subtitle">ingredients</h3>
+                    <ul class="ingredients-list">
+                        <li><span class="ingredient-name">active flour department starter</span> <span class="ingredient-amount">100g</span></li>
+                        <li><span class="ingredient-name">bread flour</span> <span class="ingredient-amount">500g</span></li>
+                        <li><span class="ingredient-name">water</span> <span class="ingredient-amount">375g</span></li>
+                        <li><span class="ingredient-name">salt</span> <span class="ingredient-amount">10g</span></li>
+                    </ul>
+                </div>
+                
+                <div class="instructions-section">
+                    <h3 class="section-subtitle">method</h3>
+                    <ol class="instructions-list">
+                        <li>mix starter with water until dissolved, then add flour and mix until no dry flour remains.</li>
+                        <li>autolyse for 30 minutes, then add salt and mix thoroughly.</li>
+                        <li>bulk ferment 4-6 hours with 4 sets of folds every 30 minutes for first 2 hours.</li>
+                        <li>pre-shape into round, rest 20 minutes, then final shape and place in banneton.</li>
+                        <li>cold proof 12-24 hours in refrigerator.</li>
+                        <li>preheat dutch oven to 475°F, score dough and bake covered 20 minutes.</li>
+                        <li>remove lid, reduce to 450°F and bake 20-25 minutes until golden.</li>
+                        <li>cool completely on wire rack before slicing.</li>
+                    </ol>
+                </div>
+                
+                <div class="recipe-notes">
+                    <h4 class="notes-title">flour department notes</h4>
+                    <p class="notes-text">timing is flexible - watch the dough, not the clock. proper fermentation creates the signature open crumb and complex flavor that makes this loaf special.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pancakes Modal -->
+    <div class="recipe-modal" id="modal-pancakes">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-image" style="background-image: url('https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+            <div class="modal-body">
+                <h2 class="modal-title">weekend flour department pancakes</h2>
+                <p class="modal-description">fluffy, tangy pancakes that transform your starter discard into weekend magic. the overnight fermentation creates incredible depth of flavor.</p>
+                
+                <div class="ingredients-section">
+                    <h3 class="section-subtitle">ingredients</h3>
+                    <ul class="ingredients-list">
+                        <li><span class="ingredient-name">flour department starter discard</span> <span class="ingredient-amount">200g</span></li>
+                        <li><span class="ingredient-name">buttermilk</span> <span class="ingredient-amount">240ml</span></li>
+                        <li><span class="ingredient-name">all-purpose flour</span> <span class="ingredient-amount">100g</span></li>
+                        <li><span class="ingredient-name">egg</span> <span class="ingredient-amount">1 large</span></li>
+                        <li><span class="ingredient-name">melted butter</span> <span class="ingredient-amount">30g</span></li>
+                        <li><span class="ingredient-name">sugar</span> <span class="ingredient-amount">1 tbsp</span></li>
+                        <li><span class="ingredient-name">baking soda</span> <span class="ingredient-amount">1 tsp</span></li>
+                        <li><span class="ingredient-name">salt</span> <span class="ingredient-amount">1/2 tsp</span></li>
+                    </ul>
+                </div>
+                
+                <div class="instructions-section">
+                    <h3 class="section-subtitle">method</h3>
+                    <ol class="instructions-list">
+                        <li>night before, mix starter discard, buttermilk, and flour. cover and ferment overnight.</li>
+                        <li>in morning, whisk egg with melted butter and sugar until smooth.</li>
+                        <li>add egg mixture to fermented batter and stir gently.</li>
+                        <li>sprinkle baking soda and salt over batter, fold in until just combined.</li>
+                        <li>heat griddle to medium heat, lightly grease with butter.</li>
+                        <li>pour 1/4 cup batter per pancake, cook until bubbles form on surface.</li>
+                        <li>flip and cook 1-2 minutes more until golden brown.</li>
+                        <li>serve immediately with butter, syrup, and fresh berries.</li>
+                    </ol>
+                </div>
+                
+                <div class="recipe-notes">
+                    <h4 class="notes-title">flour department notes</h4>
+                    <p class="notes-text">don't overmix the final batter - lumps are perfectly fine. the overnight fermentation is key to developing that signature tangy flavor.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pizza Modal -->
+    <div class="recipe-modal" id="modal-pizza">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-image" style="background-image: url('https://images.unsplash.com/photo-1571115764595-644a1f56a55c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+            <div class="modal-body">
+                <h2 class="modal-title">artisan flour department pizza</h2>
+                <p class="modal-description">crispy-bottomed pizza with incredible flavor from slow fermentation. the flour department starter creates the perfect base for any topping combination.</p>
+                
+                <div class="ingredients-section">
+                    <h3 class="section-subtitle">ingredients</h3>
+                    <ul class="ingredients-list">
+                        <li><span class="ingredient-name">active flour department starter</span> <span class="ingredient-amount">50g</span></li>
+                        <li><span class="ingredient-name">bread flour</span> <span class="ingredient-amount">300g</span></li>
+                        <li><span class="ingredient-name">water</span> <span class="ingredient-amount">200g</span></li>
+                        <li><span class="ingredient-name">olive oil</span> <span class="ingredient-amount">2 tbsp</span></li>
+                        <li><span class="ingredient-name">salt</span> <span class="ingredient-amount">6g</span></li>
+                        <li><span class="ingredient-name">pizza sauce</span> <span class="ingredient-amount">as needed</span></li>
+                        <li><span class="ingredient-name">mozzarella cheese</span> <span class="ingredient-amount">as needed</span></li>
+                        <li><span class="ingredient-name">toppings of choice</span> <span class="ingredient-amount">as desired</span></li>
+                    </ul>
+                </div>
+                
+                <div class="instructions-section">
+                    <h3 class="section-subtitle">method</h3>
+                    <ol class="instructions-list">
+                        <li>mix starter with water and olive oil until well combined.</li>
+                        <li>add flour and salt, mix until shaggy dough forms.</li>
+                        <li>bulk ferment 4-6 hours with 3 sets of folds in first 2 hours.</li>
+                        <li>divide into 2-3 portions, shape into balls and rest 30 minutes.</li>
+                        <li>preheat pizza stone or steel to 500°F for at least 1 hour.</li>
+                        <li>stretch dough gently into pizza shape, avoiding overworking.</li>
+                        <li>top with sauce, cheese, and desired toppings.</li>
+                        <li>bake 10-12 minutes until crust is golden and cheese is bubbly.</li>
+                    </ol>
+                </div>
+                
+                <div class="recipe-notes">
+                    <h4 class="notes-title">flour department notes</h4>
+                    <p class="notes-text">high heat is essential for crispy crust. let the dough come to room temperature before stretching for easier handling and better texture.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Focaccia Modal -->
+    <div class="recipe-modal" id="modal-focaccia">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-image" style="background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+            <div class="modal-body">
+                <h2 class="modal-title">flour department focaccia</h2>
+                <p class="modal-description">light, airy focaccia with a golden crust and dimpled surface perfect for olive oil pools. a showcase for seasonal toppings and herbs.</p>
+                
+                <div class="ingredients-section">
+                    <h3 class="section-subtitle">ingredients</h3>
+                    <ul class="ingredients-list">
+                        <li><span class="ingredient-name">active flour department starter</span> <span class="ingredient-amount">100g</span></li>
+                        <li><span class="ingredient-name">bread flour</span> <span class="ingredient-amount">400g</span></li>
+                        <li><span class="ingredient-name">water</span> <span class="ingredient-amount">320g</span></li>
+                        <li><span class="ingredient-name">olive oil</span> <span class="ingredient-amount">60ml</span></li>
+                        <li><span class="ingredient-name">salt</span> <span class="ingredient-amount">8g</span></li>
+                        <li><span class="ingredient-name">fresh rosemary</span> <span class="ingredient-amount">2 sprigs</span></li>
+                        <li><span class="ingredient-name">coarse sea salt</span> <span class="ingredient-amount">for topping</span></li>
+                    </ul>
+                </div>
+                
+                <div class="instructions-section">
+                    <h3 class="section-subtitle">method</h3>
+                    <ol class="instructions-list">
+                        <li>mix starter with water and half the olive oil until smooth.</li>
+                        <li>add flour and salt, mix until no dry flour remains.</li>
+                        <li>bulk ferment 8-10 hours with 3 sets of folds in first 3 hours.</li>
+                        <li>oil a 9x13 inch pan generously, transfer dough to pan.</li>
+                        <li>gently stretch to fit pan, cover and proof 2-3 hours.</li>
+                        <li>dimple surface all over with oiled fingers, drizzle with remaining oil.</li>
+                        <li>top with rosemary and coarse salt.</li>
+                        <li>bake at 425°F for 25-30 minutes until golden brown.</li>
+                    </ol>
+                </div>
+                
+                <div class="recipe-notes">
+                    <h4 class="notes-title">flour department notes</h4>
+                    <p class="notes-text">the high hydration creates an incredibly light texture. generous oil and proper dimpling are key to authentic focaccia appearance and flavor.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Waffles Modal -->
+    <div class="recipe-modal" id="modal-waffles">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-image" style="background-image: url('https://images.unsplash.com/photo-1562376552-0d160dcec87d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+            <div class="modal-body">
+                <h2 class="modal-title">crispy flour department waffles</h2>
+                <p class="modal-description">golden, crispy waffles with perfectly tender interiors and deep pockets for syrup. the overnight fermentation creates incredible flavor depth.</p>
+                
+                <div class="ingredients-section">
+                    <h3 class="section-subtitle">ingredients</h3>
+                    <ul class="ingredients-list">
+                        <li><span class="ingredient-name">flour department starter discard</span> <span class="ingredient-amount">200g</span></li>
+                        <li><span class="ingredient-name">buttermilk</span> <span class="ingredient-amount">300ml</span></li>
+                        <li><span class="ingredient-name">all-purpose flour</span> <span class="ingredient-amount">150g</span></li>
+                        <li><span class="ingredient-name">eggs</span> <span class="ingredient-amount">2 large</span></li>
+                        <li><span class="ingredient-name">melted butter</span> <span class="ingredient-amount">60g</span></li>
+                        <li><span class="ingredient-name">sugar</span> <span class="ingredient-amount">2 tbsp</span></li>
+                        <li><span class="ingredient-name">baking soda</span> <span class="ingredient-amount">1 tsp</span></li>
+                        <li><span class="ingredient-name">salt</span> <span class="ingredient-amount">1/2 tsp</span></li>
+                    </ul>
+                </div>
+                
+                <div class="instructions-section">
+                    <h3 class="section-subtitle">method</h3>
+                    <ol class="instructions-list">
+                        <li>night before, mix starter discard, buttermilk, and flour. cover and ferment overnight.</li>
+                        <li>in morning, separate eggs. whisk yolks with melted butter and sugar.</li>
+                        <li>add egg mixture to fermented batter and stir gently until combined.</li>
+                        <li>whip egg whites to soft peaks.</li>
+                        <li>sprinkle baking soda and salt over batter, fold in gently.</li>
+                        <li>fold in whipped egg whites in two additions until just combined.</li>
+                        <li>cook in preheated waffle iron until golden and crispy.</li>
+                        <li>serve immediately with butter, syrup, and fresh berries.</li>
+                    </ol>
+                </div>
+                
+                <div class="recipe-notes">
+                    <h4 class="notes-title">flour department notes</h4>
+                    <p class="notes-text">the key to crispy waffles is not overmixing the batter and cooking until deeply golden. freeze extras for quick weekday breakfasts - just pop in the toaster.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sandwich Bread Modal -->
+    <div class="recipe-modal" id="modal-sandwich-bread">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div class="modal-image" style="background-image: url('https://images.unsplash.com/photo-1586444248902-2f64eddc13df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+            <div class="modal-body">
+                <h2 class="modal-title">everyday sandwich bread</h2>
+                <p class="modal-description">soft, sliceable bread perfect for sandwiches and toast. enriched dough creates tender crumb while maintaining sourdough complexity.</p>
+                
+                <div class="ingredients-section">
+                    <h3 class="section-subtitle">ingredients</h3>
+                    <ul class="ingredients-list">
+                        <li><span class="ingredient-name">active flour department starter</span> <span class="ingredient-amount">100g</span></li>
+                        <li><span class="ingredient-name">bread flour</span> <span class="ingredient-amount">450g</span></li>
+                        <li><span class="ingredient-name">whole milk</span> <span class="ingredient-amount">240ml</span></li>
+                        <li><span class="ingredient-name">butter, softened</span> <span class="ingredient-amount">30g</span></li>
+                        <li><span class="ingredient-name">honey</span> <span class="ingredient-amount">2 tbsp</span></li>
+                        <li><span class="ingredient-name">salt</span> <span class="ingredient-amount">8g</span></li>
+                        <li><span class="ingredient-name">egg</span> <span class="ingredient-amount">1 large</span></li>
+                    </ul>
+                </div>
+                
+                <div class="instructions-section">
+                    <h3 class="section-subtitle">method</h3>
+                    <ol class="instructions-list">
+                        <li>warm milk slightly, mix with starter and honey until combined.</li>
+                        <li>add flour, egg, salt, and softened butter. knead until smooth.</li>
+                        <li>bulk ferment 8-10 hours until doubled in oiled bowl.</li>
+                        <li>shape into loaf and place in greased 9x5 inch pan.</li>
+                        <li>cover and proof 3-4 hours until dough crowns the pan.</li>
+                        <li>brush top with beaten egg for golden crust.</li>
+                        <li>bake at 375°F for 35-40 minutes until golden brown.</li>
+                        <li>cool completely before slicing for clean cuts.</li>
+                    </ol>
+                </div>
+                
+                <div class="recipe-notes">
+                    <h4 class="notes-title">flour department notes</h4>
+                    <p class="notes-text">the enriched dough creates a tender, long-lasting loaf perfect for daily use. slice when completely cool for best texture and storage life.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check for backdrop-filter support
+        function supportsBackdropFilter() {
+            return CSS.supports('backdrop-filter', 'blur(1px)') || CSS.supports('-webkit-backdrop-filter', 'blur(1px)');
+        }
+
+        // Mobile menu functionality
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const navRight = document.getElementById('nav-right');
+
+        mobileToggle.addEventListener('click', function() {
+            navRight.classList.toggle('mobile-open');
+            
+            // Animate hamburger icon
+            const spans = this.querySelectorAll('span');
+            spans.forEach((span, index) => {
+                if (navRight.classList.contains('mobile-open')) {
+                    if (index === 0) span.style.transform = 'rotate(45deg) translate(5px, 5px)';
+                    if (index === 1) span.style.opacity = '0';
+                    if (index === 2) span.style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                } else {
+                    span.style.transform = '';
+                    span.style.opacity = '';
+                }
+            });
+        });
+
+        // Close mobile menu when clicking on links
+        navRight.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+                navRight.classList.remove('mobile-open');
+                const spans = mobileToggle.querySelectorAll('span');
+                spans.forEach(span => {
+                    span.style.transform = '';
+                    span.style.opacity = '';
+                });
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Enhanced recipe modal functionality with improved mobile blur
+        function openRecipe(recipeId) {
+            const modal = document.getElementById(`modal-${recipeId}`);
+            if (modal) {
+                // Add backdrop-filter support check
+                if (!supportsBackdropFilter()) {
+                    modal.classList.add('no-backdrop-filter');
+                }
+                
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                document.body.classList.add('modal-open');
+                
+                // Force a repaint to ensure blur effect applies
+                setTimeout(() => {
+                    modal.style.opacity = '1';
+                }, 10);
+            }
+        }
+
+        function closeModal() {
+            const modals = document.querySelectorAll('.recipe-modal');
+            modals.forEach(modal => {
+                modal.style.display = 'none';
+                modal.style.opacity = '';
+                modal.classList.remove('no-backdrop-filter');
+            });
+            document.body.style.overflow = 'auto';
+            document.body.classList.remove('modal-open');
+        }
+
+        // Close modal when clicking outside
+        document.querySelectorAll('.recipe-modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+        });
+
+        // Close modal with escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Handle window resize for responsive adjustments
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                navRight.classList.remove('mobile-open');
+                const spans = mobileToggle.querySelectorAll('span');
+                spans.forEach(span => {
+                    span.style.transform = '';
+                    span.style.opacity = '';
+                });
+            }
+        });
+
+        // Prevent scrolling on touch devices when modal is open
+        let touchStartY = 0;
+        document.addEventListener('touchstart', function(e) {
+            if (document.body.classList.contains('modal-open')) {
+                touchStartY = e.touches[0].clientY;
+            }
+        }, { passive: false });
+
+        document.addEventListener('touchmove', function(e) {
+            if (document.body.classList.contains('modal-open')) {
+                const touchY = e.touches[0].clientY;
+                const touchDiff = touchStartY - touchY;
+                
+                // Check if we're trying to scroll the modal content or the background
+                const modalContent = e.target.closest('.modal-content');
+                if (!modalContent) {
+                    e.preventDefault();
+                }
+            }
+        }, { passive: false });
+    </script>
+</body>
+</html>
